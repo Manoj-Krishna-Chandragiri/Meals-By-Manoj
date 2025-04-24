@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 export const Context = createContext();
@@ -15,7 +16,7 @@ export const ContextProvider = ({children}) => {
         : "https://food-delivery-backend-a3p8.onrender.com";
     
     // Add function to fetch food items
-    const fetchFoodItems = async () => {
+    const fetchFoodItems = useCallback(async () => {
         try {
             const response = await axios.get(`${url}/api/food/list`);
             if (response.data.success) {
@@ -24,9 +25,9 @@ export const ContextProvider = ({children}) => {
         } catch (error) {
             console.error("Error fetching food items:", error);
         }
-    };
+    }, [url]);
 
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async () => {
         setLoading(true);
         try {
             const response = await axios.get(`${url}/api/order/list`);
@@ -37,9 +38,9 @@ export const ContextProvider = ({children}) => {
             console.error("Error fetching orders:", error);
         }
         setLoading(false);
-    };
+    }, [url]);
 
-    const fetchUsers = async () => {
+    const fetchUsers = useCallback(async () => {
         setLoading(true);
         try {
             const response = await axios.get(`${url}/api/user/list`);
@@ -50,13 +51,13 @@ export const ContextProvider = ({children}) => {
             console.error("Error fetching users:", error);
         }
         setLoading(false);
-    };
+    }, [url]);
 
     useEffect(() => {
         fetchFoodItems();
         fetchOrders();
         fetchUsers();
-    }, []);
+    }, [fetchFoodItems, fetchOrders, fetchUsers]);
 
     const contextValue = {
         foodItems,
@@ -71,10 +72,13 @@ export const ContextProvider = ({children}) => {
         loading,
         url
     };
-
     return (
         <Context.Provider value={contextValue}>
             {children}
         </Context.Provider>
     );
+};
+
+ContextProvider.propTypes = {
+    children: PropTypes.node.isRequired
 };

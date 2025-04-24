@@ -1,16 +1,17 @@
 import React from 'react'
 import './Orders.css'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import {toast} from "react-toastify"
 import { useEffect } from 'react'
 import axios from "axios"
 import {assets} from "../../assets/assets"
+import PropTypes from 'prop-types'
 
 const Orders = ({url}) => {
 
   const [orders,setOrders] = useState([]);
 
-  const fetchAllOrders = async () => {
+  const fetchAllOrders = useCallback(async () => {
     const response = await axios.get(url+"/api/order/list");
     if (response.data.success) {
       setOrders(response.data.data);
@@ -19,7 +20,7 @@ const Orders = ({url}) => {
     else{
       toast.error("Error")
     }
-  }
+  }, [url]);
 
   const statusHandler = async (event,orderId) => {
     const response = await axios.post(url+"/api/order/status",{
@@ -33,7 +34,7 @@ const Orders = ({url}) => {
 
   useEffect(()=>{
     fetchAllOrders();
-  },[])
+  },[fetchAllOrders])
 
   return (
     <div className='order add'>
@@ -72,6 +73,9 @@ const Orders = ({url}) => {
         </div>
     </div>
   )
+}
+Orders.propTypes = {
+  url: PropTypes.string.isRequired
 }
 
 export default Orders
