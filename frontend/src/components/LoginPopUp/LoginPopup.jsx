@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import './LoginPopup.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/StoreContext';
@@ -63,6 +64,9 @@ const LoginPopup = ({ setShowLogin }) => {
       </form>
     </div>
   );
+};
+LoginPopup.propTypes = {
+  setShowLogin: PropTypes.func.isRequired
 };
 
 export default LoginPopup;
