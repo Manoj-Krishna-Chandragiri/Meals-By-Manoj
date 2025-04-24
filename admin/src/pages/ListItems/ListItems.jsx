@@ -1,3 +1,4 @@
+// This file duplicates the functionality of List.jsx and isn't used in any routes
 import { useContext, useEffect } from 'react';
 import './ListItems.css';
 import { Context } from '../../context/Context';

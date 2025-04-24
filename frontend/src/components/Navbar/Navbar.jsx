@@ -12,6 +12,7 @@ const Navbar = ({ setShowLogin }) => {
     const [searchSuggestions, setSearchSuggestions] = useState([]);
     
     const searchInputRef = useRef(null);
+    const searchContainerRef = useRef(null);
     const {getTotalCartAmount, token, setToken} = useContext(StoreContext);
     const navigate = useNavigate();
 
@@ -52,6 +53,31 @@ const Navbar = ({ setShowLogin }) => {
         setSearchSuggestions(suggestions.slice(0, 5));
     }, [searchQuery]);
 
+    // Handle clicks outside of search container
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // If search is active and the click is outside the search container
+            if (searchActive && 
+                searchContainerRef.current && 
+                !searchContainerRef.current.contains(event.target)) {
+                setSearchActive(false);
+                // Don't reset the search query when closing
+                // setSearchQuery("");
+                setSearchSuggestions([]);
+            }
+        };
+        
+        // Add event listener when search is active
+        if (searchActive) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        
+        // Clean up the event listener
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [searchActive]);
+
     // Handle search icon click
     const handleSearchIconClick = () => {
         setSearchActive(!searchActive);
@@ -60,11 +86,19 @@ const Navbar = ({ setShowLogin }) => {
             setTimeout(() => {
                 if (searchInputRef.current) {
                     searchInputRef.current.focus();
+                    
+                    // If there's a previous query, update suggestions
+                    if (searchQuery.trim() !== "") {
+                        // This will trigger the useEffect for suggestions
+                        setSearchQuery(searchQuery);
+                    }
                 }
             }, 100);
-        } else {
-            setSearchQuery("");
         }
+        // Don't reset search query when toggling search
+        // else {
+        //     setSearchQuery("");
+        // }
     };
 
     // Handle search suggestion click
@@ -82,7 +116,8 @@ const Navbar = ({ setShowLogin }) => {
             
             // Close search
             setSearchActive(false);
-            setSearchQuery("");
+            // Don't reset search query when selecting a suggestion
+            // setSearchQuery("");
             setSearchSuggestions([]);
         }
     };
@@ -120,10 +155,18 @@ const Navbar = ({ setShowLogin }) => {
         
         if (found) {
             setSearchActive(false);
+            // Don't reset search query when submitting a search
+            // setSearchQuery("");
         } else {
             // Show not found message
             alert("No food items match your search. Try a different term.");
         }
+    };
+
+    // Clear search - add a new function for explicitly clearing search
+    const clearSearch = () => {
+        setSearchQuery("");
+        setSearchSuggestions([]);
     };
 
     const logout = () => {
@@ -150,8 +193,8 @@ const Navbar = ({ setShowLogin }) => {
                         className={searchActive ? "active" : ""}
                     />
                     {searchActive && (
-                        <div className="search-container">
-                            <form onSubmit={handleSearchSubmit}>
+                        <div className="search-container" ref={searchContainerRef}>
+                            <form onSubmit={handleSearchSubmit} className="search-form">
                                 <input 
                                     ref={searchInputRef}
                                     type="text" 
@@ -159,10 +202,19 @@ const Navbar = ({ setShowLogin }) => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <button type="submit">Search</button>
+                                {searchQuery && (
+                                    <button 
+                                        type="button" 
+                                        className="clear-search" 
+                                        onClick={clearSearch}
+                                    >
+                                        ×
+                                    </button>
+                                )}
+                                <button type="submit" className="search-submit-btn">Search</button>
                             </form>
                             
-                            {/* Search suggestions */}
+                            {/* Search suggestions - use same width as form */}
                             {searchSuggestions.length > 0 && (
                                 <div className="search-suggestions">
                                     {searchSuggestions.map(suggestion => (
