@@ -118,13 +118,96 @@
     position: absolute;
     top: 100%;
     right: 0;
-    width: 300px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 10px;
+    width: 350px; /* Fixed width for the entire search container */
     z-index: 100;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 10px;
     margin-top: 10px;
+}
+
+/* Search form styling */
+.search-form {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+/* Input styling */
+.search-form input[type="text"] {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Right padding for the clear button */
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+/* Clear button styling */
+.clear-search {
+    position: absolute;
+    right: 75px; /* Position to the left of the search button */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #888;
+    padding: 0 8px;
+}
+
+.clear-search:hover {
+    color: #333;
+}
+
+/* Search button styling */
+.search-submit-btn {
+    min-width: 70px;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
+.search-submit-btn:hover {
+    background-color: #ff6b81;
+}
+
+/* Search suggestions container */
+.search-suggestions {
+    width: 100%; /* Match the width of the form */
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: white;
+    border-top: 1px solid #eee;
+}
+
+.search-suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-suggestion-item:hover {
+    background-color: #f8f8f8;
+}
+
+.suggestion-name {
+    font-weight: bold;
+}
+
+.suggestion-desc {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* If you have existing styles for the navbar-search, make sure they don't conflict */
+.navbar-search {
+    position: relative;
 }
 
 /* Search suggestions styling */
