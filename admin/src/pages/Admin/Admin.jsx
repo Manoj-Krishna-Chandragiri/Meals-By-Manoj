@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Admin = () => {
   const [foodItems, setFoodItems] = useState([]);
-  const url = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const url = 'http://localhost:5000';
 
   useEffect(() => {
     const fetchFoodItems = async () => {

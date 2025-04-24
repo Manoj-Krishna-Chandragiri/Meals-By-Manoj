@@ -1,15 +1,16 @@
 import React from 'react'
 import './List.css'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import axios from "axios"
 import {toast} from "react-toastify"
 import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 const List = ({url}) => {
 
   const [list,setList] = useState([]);
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     const response = await axios.get(`${url}/api/food/list`);
     if (response.data.success) {
       setList(response.data.data)
@@ -18,7 +19,7 @@ const List = ({url}) => {
     {
       toast.error("Error")
     }
-  }
+  }, [url]);
 
   const removeFood = async(foodId) => {
     const response = await axios.post(`${url}/api/food/remove`,{id:foodId});
@@ -33,7 +34,7 @@ const List = ({url}) => {
 
   useEffect(()=>{
     fetchList();
-  },[])
+  },[fetchList])
 
   return (
     <div className='list add flex-col'>
@@ -60,6 +61,9 @@ const List = ({url}) => {
       </div>
     </div>
   )
+}
+List.propTypes = {
+  url: PropTypes.string.isRequired
 }
 
 export default List

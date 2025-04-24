@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ExploreMenu.css';
 import { menu_list } from '../../assets/assets';
 
@@ -18,6 +19,10 @@ const ExploreMenu = ({ category, setCategory }) => {
             <hr />
         </div>
     );
+};
+ExploreMenu.propTypes = {
+    category: PropTypes.string.isRequired,
+    setCategory: PropTypes.func.isRequired
 };
 
 export default ExploreMenu;

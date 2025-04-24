@@ -4,6 +4,7 @@ import { assets } from '../../assets/assets'
 import { useState } from 'react'
 import axios from "axios"
 import { toast } from 'react-toastify'
+import PropTypes from 'prop-types'
 
 const Add = ({url}) => {
 
@@ -86,6 +87,9 @@ const Add = ({url}) => {
       </form>
     </div>
   )
+}
+Add.propTypes = {
+  url: PropTypes.string.isRequired
 }
 
 export default Add

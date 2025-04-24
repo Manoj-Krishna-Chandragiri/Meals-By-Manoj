@@ -8,7 +8,7 @@ const ListItems = () => {
   useEffect(() => {
     // Refresh food items when component mounts
     fetchFoodItems();
-  }, []);
+  }, [fetchFoodItems]);
 
   const handleDelete = async (id) => {
     try {
