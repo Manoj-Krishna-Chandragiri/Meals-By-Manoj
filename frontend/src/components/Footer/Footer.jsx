@@ -27,12 +27,12 @@ const Footer = () => {
                     <h2>GET IN TOUCH</h2>
                     <ul>
                         <li>+91 852-382-3805</li>
-                        <li>contact@manojkrishna.com</li>
+                        <li>contact@manojkrishna.me</li>
                     </ul>
                 </div>
             </div>
             <hr />
-            <p className="footer-copyright">Copyright 2024 © Tomato.com -  All Rights Reserved.</p>
+            <p className="footer-copyright">Copyright 2024 © MealsByManoj.com -  All Rights Reserved.</p>
         </div>
     )
 }
