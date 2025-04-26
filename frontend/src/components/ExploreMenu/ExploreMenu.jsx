@@ -98,9 +98,12 @@ const ExploreMenu = ({ category, setCategory }) => {
                         };
                     });
 
-                    // Add "All" category at the beginning
+                    // Create a circular SVG for the "All" category
+                    const allCategoryIcon = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff6347'/%3E%3Ctext x='50' y='55' font-size='20' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'%3EAll%3C/text%3E%3C/svg%3E`;
+
+                    // Add "All" category at the beginning with a circular icon
                     setMenuCategories([
-                        { menu_name: "All", menu_image: assets.menu_all },
+                        { menu_name: "All", menu_image: allCategoryIcon },
                         ...formattedCategories
                     ]);
                 }

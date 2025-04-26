@@ -66,11 +66,15 @@
 
 .menu-image {
     width: 7.5vw;
+    height: 7.5vw; /* Add fixed height equal to width */
     min-width: 80px;
+    min-height: 80px; /* Add min-height to match min-width */
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 50%; /* Ensure perfect circle */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     filter: brightness(95%);
+    object-fit: cover; /* Ensure image fills the circle without distortion */
+    background-color: #ff6347; /* Tomato background for images that don't fully fill */
 }
 
 .menu-image:hover {
