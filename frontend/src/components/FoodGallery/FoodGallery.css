@@ -1,0 +1,208 @@
+.food-gallery {
+  width: 100%;
+  margin: 60px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.food-gallery.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.food-gallery-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.food-gallery-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 60px;
+  height: 4px;
+  background-color: tomato;
+  transition: width 0.3s ease;
+}
+
+.food-gallery-title:hover::after {
+  width: 100%;
+}
+
+.food-gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.food-gallery-showcase {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.featured-food {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.featured-food:hover {
+  transform: scale(1.03);
+}
+
+.food-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 2rem;
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.featured-food:hover .food-info {
+  transform: translateY(-10px);
+}
+
+.food-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.food-info p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.food-price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.rating {
+  height: 20px;
+}
+
+.add-to-cart-btn {
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #ff4757;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+.food-gallery-thumbnails {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.food-gallery-thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.food-gallery-thumbnails::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.food-gallery-thumbnails::-webkit-scrollbar-thumb {
+  background: tomato;
+  border-radius: 10px;
+}
+
+.thumbnail {
+  min-width: 120px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px;
+  font-size: 0.8rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.thumbnail:hover .thumbnail-name {
+  transform: translateY(0);
+}
+
+.thumbnail.active {
+  border: 3px solid tomato;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .food-gallery-showcase {
+    height: 350px;
+  }
+  
+  .food-info h3 {
+    font-size: 1.5rem;
+  }
+  
+  .food-info p {
+    font-size: 0.9rem;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+  }
+  
+  .thumbnail {
+    min-width: 100px;
+    height: 80px;
+  }
+}

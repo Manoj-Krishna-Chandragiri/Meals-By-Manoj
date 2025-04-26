@@ -49,6 +49,11 @@ export const ContextProvider = ({children}) => {
             }
         } catch (error) {
             console.error("Error fetching users:", error);
+            // If we get a 404, it might be because the endpoint is not implemented yet
+            if (error.response && error.response.status === 404) {
+                console.log("User list endpoint not available - using empty array");
+                setUsers([]);
+            }
         }
         setLoading(false);
     }, [url]);
@@ -56,7 +61,13 @@ export const ContextProvider = ({children}) => {
     useEffect(() => {
         fetchFoodItems();
         fetchOrders();
-        fetchUsers();
+        
+        // Only try to fetch users if we need them
+        // This prevents unnecessary errors if the endpoint isn't implemented yet
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('user')) {
+            fetchUsers();
+        }
     }, [fetchFoodItems, fetchOrders, fetchUsers]);
 
     const contextValue = {

@@ -1,10 +1,29 @@
 .food-display {
     margin-top: 30px;
+    animation: slideUp 0.8s ease;
 }
 
 .food-display h2 {
     font-size: max(2vw, 24px);
     font-weight: 600;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.food-display h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: tomato;
+    transition: width 0.3s ease;
+}
+
+.food-display h2:hover::after {
+    width: 100%;
 }
 
 .food-display-list {
@@ -13,4 +32,48 @@
     margin-top: 30px;
     gap: 30px;
     row-gap: 50px;
+    animation: fadeIn 1s ease;
+}
+
+/* Foods appear with staggered delay */
+.food-display-list > div {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: itemFadeIn 0.5s ease forwards;
+}
+
+.food-display-list > div:nth-child(1) { animation-delay: 0.1s; }
+.food-display-list > div:nth-child(2) { animation-delay: 0.2s; }
+.food-display-list > div:nth-child(3) { animation-delay: 0.3s; }
+.food-display-list > div:nth-child(4) { animation-delay: 0.4s; }
+.food-display-list > div:nth-child(5) { animation-delay: 0.5s; }
+.food-display-list > div:nth-child(6) { animation-delay: 0.6s; }
+.food-display-list > div:nth-child(7) { animation-delay: 0.7s; }
+.food-display-list > div:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes itemFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
