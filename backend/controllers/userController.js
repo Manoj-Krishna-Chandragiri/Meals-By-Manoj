@@ -63,5 +63,17 @@ const createToken = (id) =>{
     }
  }
 
- export {loginUser,registerUser}
- 
+ // Add a new function to list all users
+const listUsers = async (req, res) => {
+  try {
+    // Get all users but exclude sensitive info like passwords
+    const users = await userModel.find({}, { password: 0 });
+    res.json({ success: true, data: users });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error fetching users" });
+  }
+};
+
+// Don't forget to export the new function
+export { registerUser, loginUser, listUsers };
