@@ -56,6 +56,66 @@ const removeFood = async (req,res) => {
     }
 }
 
+// Edit food item
+const editFood = async (req, res) => {
+    console.log("Edit food endpoint called with data:", req.body);
+    
+    try {
+        const { id, name, description, price, category } = req.body;
+        
+        // Validate required fields
+        if (!id || !name || !description || price === undefined || !category) {
+            return res.json({
+                success: false,
+                message: "Missing required fields",
+                received: { id, name, description, price, category }
+            });
+        }
+
+        // Find the food item by ID
+        const food = await foodModel.findById(id);
+        if (!food) {
+            return res.json({
+                success: false,
+                message: "Food item not found with ID: " + id
+            });
+        }
+
+        console.log("Found food item to update:", food);
+
+        // Update the food item
+        food.name = name;
+        food.description = description;
+        food.price = Number(price);
+        food.category = category;
+
+        // Save the updated food item
+        const updatedFood = await food.save();
+        console.log("Food item updated successfully:", updatedFood);
+
+        // Check if category exists, if not add it
+        const categoryExists = await categoryModel.findOne({ name: category });
+        if (!categoryExists) {
+            console.log("Adding new category:", category);
+            const newCategory = new categoryModel({ name: category });
+            await newCategory.save();
+        }
+
+        res.json({
+            success: true,
+            message: "Food item updated successfully",
+            updatedFood: updatedFood
+        });
+    } catch (error) {
+        console.error("Error updating food item:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error updating food item: " + error.message,
+            error: error.stack
+        });
+    }
+};
+
 // Get all categories
 const getCategories = async (req, res) => {
     try {
@@ -170,4 +230,4 @@ const removeCategory = async (req, res) => {
     }
 };
 
-export { addFood, listFood, removeFood, getCategories, addCategory, removeCategory };
+export { addFood, listFood, removeFood, editFood, getCategories, addCategory, removeCategory };
