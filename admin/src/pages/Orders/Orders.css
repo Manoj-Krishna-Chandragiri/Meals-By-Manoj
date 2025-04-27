@@ -1,44 +1,80 @@
-.order-item{
+/* Improved order item styling */
+.order-item {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
-    align-items: start;
-    gap: 30px;
-    border: 1px solid tomato;
-    padding: 20px;
-    margin: 30px 0px;
-    font-size: 14px;
-    color: #505050;
-}
-.order-item-food, .order-item-name{
-    font-weight: 600;
-}
-.order-item-name{
-    margin-top: 30px;
-    margin-bottom: 5px;
-}
-.order-item-address{
-    margin-bottom: 10px;
-}
-.order-item select{
-    background-color: #ffe8e4;
-    border: 1px solid tomato;
-    width: max(12vw,120px);
-    padding: 10px;
-    outline: none;
+    grid-template-columns: 0.4fr 2fr 0.6fr 0.6fr 0.8fr;
+    gap: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    align-items: center;
 }
 
-@media (max-width:1000px) {
-    .order-item{
-        font-size: 12px;
-        grid-template-columns: 0.5fr 2fr 1fr;
-        padding: 15px 8px;
-    }
-    .order-item select{
-        padding: 5px;
-        font-size: 12px;
-    }
-    .order-item img{
-        width: 40px;
-        
-    }
+.order-item img {
+    width: 40px;
+    height: 40px;
+}
+
+.order-item-food {
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.order-item-name {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.order-item-address {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.order-item-phone {
+    font-size: 14px;
+    color: #444;
+}
+
+.order-item select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 14px;
+}
+
+/* Dark mode improvements */
+.dark-mode .order-item {
+    background-color: #262626;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .order-item-food {
+    color: #ffffff;
+}
+
+.dark-mode .order-item-name {
+    color: #e0e0e0;
+}
+
+.dark-mode .order-item-address {
+    color: #bbbbbb;
+}
+
+.dark-mode .order-item-phone {
+    color: #cccccc;
+}
+
+.dark-mode .order-item select {
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #555555;
+}
+
+.dark-mode .order-item img {
+    filter: brightness(0.9);
 }

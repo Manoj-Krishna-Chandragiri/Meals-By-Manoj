@@ -11,3 +11,23 @@
 .navbar .profile{
     width: 40px;
 }
+
+/* Add navbar right section with flexbox for proper alignment */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Dark mode styles */
+.dark-mode .navbar {
+  background-color: var(--bg-color);
+}
+
+.dark-mode .logo {
+  filter: none; /* Keep original logo appearance in dark mode */
+}
+
+.dark-mode .profile {
+  border-color: var(--border-color);
+}

@@ -1,0 +1,114 @@
+.dark-mode-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.dark-mode-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dark-mode-toggle-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 48px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: background-color 0.3s;
+  padding: 2px;
+}
+
+/* Make toggle slider black in light mode */
+.dark-mode-toggle-label::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #333; /* Black slider in light mode */
+  transition: transform 0.3s, background-color 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-toggle-input:checked + .dark-mode-toggle-label {
+  background-color: #555; /* Darker background when toggled */
+}
+
+.dark-mode-toggle-input:checked + .dark-mode-toggle-label::after {
+  transform: translateX(24px);
+  background-color: white; /* White slider in dark mode */
+}
+
+.dark-mode-toggle-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  z-index: 1;
+}
+
+/* Color for icons based on theme */
+.sun-icon, .moon-icon {
+  width: 16px;
+  height: 16px;
+  color: #333; /* Dark color in light mode */
+  opacity: 0.6;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.sun-icon {
+  margin-right: auto;
+  opacity: 1;
+}
+
+.moon-icon {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+/* Dark mode specific styles */
+.dark-mode .dark-mode-toggle-input:checked + .dark-mode-toggle-label {
+  background-color: #ff4e4e; /* Primary color in dark mode */
+}
+
+.dark-mode .sun-icon,
+.dark-mode .moon-icon {
+  color: white; /* White icons in dark mode */
+}
+
+/* Adjust for small screens */
+@media (max-width: 768px) {
+  .dark-mode-toggle-label {
+    width: 44px;
+    height: 22px;
+  }
+  
+  .dark-mode-toggle-label::after {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .dark-mode-toggle-input:checked + .dark-mode-toggle-label::after {
+    transform: translateX(22px);
+  }
+  
+  .sun-icon, .moon-icon {
+    width: 14px;
+    height: 14px;
+  }
+}

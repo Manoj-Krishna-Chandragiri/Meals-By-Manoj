@@ -1,15 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+:root {
+  --bg-color: #fcfcfc;
+  --text-color: #333333;
+  --primary-color: #4a90e2;
+  --secondary-color: #777777;
+  --hover-bg-color: #f5f5f5;
+  --border-color: #cacaca;
+  --card-bg-color: #ffffff;
+  --header-color: #444444;
+  --button-color: #4a90e2;
+  --button-hover: #357ab8;
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #f0f0f0;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #4a90e2;
+  --secondary-color: #a0a0a0;
+  --hover-bg-color: #2a2a2a;
+  --border-color: #444444;
+  --card-bg-color: #1e1e1e;
+  --header-color: #ffffff;
+  --button-color: #4a90e2;
+  --button-hover: #65a3e8;
+  --sidebar-bg: #1a1a1a;
+  --sidebar-hover: #333333;
+}
+
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: Outfit, sans-serif;
 }
 
 body{
   min-height: 100vh;
-  background-color: #fcfcfc;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 a{
@@ -20,7 +52,8 @@ a{
 hr{
   border: none;
   height: 1px;
-  background-color: #a9a9a9;
+  background-color: var(--border-color);
+  transition: background-color 0.3s;
 }
 
 .app-content{
@@ -42,4 +75,120 @@ hr{
   width: auto;
   height: 40px; /* Adjust this value as needed */
   object-fit: contain;
+}
+
+/* Dark mode styles for specific components */
+.dark-mode button:not(.edit-btn):not(.delete-btn):not(.refresh-btn):not(.dark-mode-toggle-label) {
+  background-color: var(--card-bg-color);
+  border-color: var(--border-color);
+}
+
+.dark-mode input, 
+.dark-mode textarea, 
+.dark-mode select {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+/* Toast notification dark mode */
+.dark-mode .Toastify__toast {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+}
+
+/* Improved dark mode text visibility - admin specific */
+.dark-mode .sidebar-option p {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.dark-mode .sidebar-option.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .sidebar-option.active p {
+  color: #ffffff !important;
+}
+
+/* Improve visibility in list and tables */
+.dark-mode .list h2,
+.dark-mode .add h2,
+.dark-mode .add h3, 
+.dark-mode .list-table-format b, 
+.dark-mode .order h3 {
+  color: #ffffff !important;
+}
+
+.dark-mode .item-category,
+.dark-mode .list-table-format p,
+.dark-mode .order-item p {
+  color: #e0e0e0 !important;
+}
+
+/* Better visibility for form labels and inputs */
+.dark-mode .add-product-name p,
+.dark-mode .add-product-description p,
+.dark-mode .add-category p,
+.dark-mode .add-price p,
+.dark-mode .add-img-upload p {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.dark-mode .category-manager h3,
+.dark-mode .category-manager h4 {
+  color: #ffffff !important;
+}
+
+.dark-mode .remove-category-warning p {
+  color: #ffcc00 !important; /* Yellow warning text */
+}
+
+.dark-mode .categories-grid .category-item {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 5px;
+  display: inline-block;
+}
+
+/* Improve order item visibility */
+.dark-mode .order-item {
+  background-color: #222222;
+  border: 1px solid #444444;
+}
+
+.dark-mode .order-item-food,
+.dark-mode .order-item-name,
+.dark-mode .order-item-address p,
+.dark-mode .order-item-phone {
+  color: #ffffff !important;
+}
+
+/* Improve tabs visibility */
+.dark-mode .add-tabs button {
+  background-color: #333333;
+  color: #cccccc;
+  border: 1px solid #555555;
+}
+
+.dark-mode .add-tabs button.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+}
+
+/* Better visibility for search and filter controls */
+.dark-mode .search-input,
+.dark-mode .category-filter {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.dark-mode .refresh-btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
 }

@@ -1,28 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: tomato;
+  --secondary-color: #49557e;
+  --hover-bg-color: #f5f5f5;
+  --border-color: #e0e0e0;
+  --card-bg-color: #ffffff;
+  --counter-bg-color: #ffffff;
+  --counter-text-color: #333333;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+  --secondary-text-color: #666666;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #ff6347;
+  --secondary-color: #7a89b1;
+  --hover-bg-color: #2a2a2a;
+  --border-color: #444444;
+  --card-bg-color: #1e1e1e;
+  --counter-bg-color: #333333;
+  --counter-text-color: #ffffff;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  --secondary-text-color: #a0a0a0;
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: Outfit, sans-serif;
   scroll-behavior: smooth;
 }
-body{
+
+body {
   min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
-a{
+
+a {
   text-decoration: none;
   color: inherit;
 }
-.app{
+
+.app {
   width: 80%;
   margin: auto;
 }
 
 @keyframes fadeIn {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
+}
+
+/* Generic dark mode styles for common elements */
+.dark-mode button {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.dark-mode input, 
+.dark-mode textarea, 
+.dark-mode select {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.dark-mode img {
+  filter: brightness(0.9);
+}
+
+/* Toast notification dark mode styles */
+.dark-mode .Toastify__toast {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+}
+
+.dark-mode .Toastify__close-button {
+  color: var(--text-color);
+}
+
+.dark-mode hr {
+  background-color: var(--border-color);
+}
+
+/* Fix for keeping logo original in dark mode */
+.dark-mode .logo, 
+.dark-mode .navbar img.logo,
+.dark-mode .footer img.logo {
+  filter: none; /* Keep logo original in dark mode */
+}
+
+/* Make only specific icons white in dark mode */
+.dark-mode .navbar-search img,
+.dark-mode .navbar-search-icon img,
+.dark-mode .navbar-profile > img {
+  filter: brightness(10); /* Make these specific icons white */
+}
+
+/* Make sure profile icon is white in dark mode */
+.dark-mode .navbar-right .navbar-profile > img {
+  filter: brightness(10) !important; /* Ensure profile icon is white */
+}
+
+/* Make sure text is always visible in dark mode */
+.dark-mode p, 
+.dark-mode h1, 
+.dark-mode h2, 
+.dark-mode h3, 
+.dark-mode h4, 
+.dark-mode h5, 
+.dark-mode h6,
+.dark-mode span,
+.dark-mode label,
+.dark-mode div {
+  color: var(--text-color);
+}
+
+/* Ensure buttons maintain consistent styling in dark mode */
+.dark-mode button.search-submit-btn,
+.dark-mode button.add-to-cart-btn,
+.dark-mode .food-gallery-item-button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.dark-mode button.search-submit-btn:hover,
+.dark-mode button.add-to-cart-btn:hover,
+.dark-mode .food-gallery-item-button:hover {
+  background-color: #ff3d21 !important;
+  color: white !important;
+}
+
+/* Make search clear button orange in dark mode */
+.dark-mode .clear-search {
+  color: var(--primary-color) !important;
+}
+
+.dark-mode .clear-search:hover {
+  color: #ff3d21 !important;
+}
+
+/* Make toggle symbols white in dark mode */
+.dark-mode .dark-mode-toggle-icon svg {
+  color: white;
+}
+
+.dark-mode .dark-mode-toggle-icon .sun-icon,
+.dark-mode .dark-mode-toggle-icon .moon-icon {
+  filter: brightness(10); /* Make icons white */
 }

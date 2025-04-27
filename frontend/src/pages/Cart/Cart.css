@@ -88,3 +88,52 @@
         justify-content: start;
     }
 }
+
+/* Dark mode styles for better visibility */
+.dark-mode .cart-total h2,
+.dark-mode .cart-total b,
+.dark-mode .cart-total p {
+  color: #ffffff !important;
+}
+
+.dark-mode .cart-total-details {
+  color: #d1d1d1 !important;
+}
+
+/* Keep checkout button orange in dark mode */
+.dark-mode .cart-total button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none;
+  box-shadow: 0 4px 8px rgba(255, 71, 87, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dark-mode .cart-total button:hover {
+  background-color: #ff3d21 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 71, 87, 0.3);
+}
+
+/* Promo code section styling */
+.dark-mode .cart-promocode p {
+  color: #d1d1d1 !important;
+}
+
+.dark-mode .cart-promocode-input {
+  background-color: #333333;
+  border: 1px solid #444444;
+}
+
+.dark-mode .cart-promocode-input input {
+  color: white;
+}
+
+.dark-mode .cart-promocode-input button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.dark-mode .cart-promocode-input button:hover {
+  background-color: #ff3d21 !important;
+}

@@ -32,3 +32,16 @@
     }
     
 }
+
+/* Improve sidebar icon visibility in both themes */
+.sidebar-option img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+/* Dark theme - make icons white */
+.dark-mode .sidebar-option img {
+    filter: brightness(10) !important; /* Make icons white in dark mode with high priority */
+}

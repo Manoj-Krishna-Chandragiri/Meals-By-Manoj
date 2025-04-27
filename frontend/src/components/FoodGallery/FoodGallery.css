@@ -206,3 +206,19 @@
     height: 80px;
   }
 }
+
+/* Ensure Add to Cart button is always visible and orange in dark mode */
+.dark-mode .food-gallery-item-button,
+.dark-mode button.add-to-cart-btn {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none;
+  box-shadow: 0 4px 8px rgba(255, 71, 87, 0.2);
+}
+
+.dark-mode .food-gallery-item-button:hover,
+.dark-mode button.add-to-cart-btn:hover {
+  background-color: #ff3d21 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 71, 87, 0.3);
+}
