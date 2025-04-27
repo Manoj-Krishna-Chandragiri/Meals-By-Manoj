@@ -4,6 +4,7 @@ import './LoginPopup.css';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/StoreContext';
 import axios from "axios";
+import TermsConditions from '../TermsConditions/TermsConditions';
 
 const LoginPopup = ({ setShowLogin }) => {
   const { url, setToken } = useContext(StoreContext);
@@ -14,6 +15,8 @@ const LoginPopup = ({ setShowLogin }) => {
     email: "",
     password: ""
   });
+  const [showTerms, setShowTerms] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
@@ -23,10 +26,16 @@ const LoginPopup = ({ setShowLogin }) => {
 
   const onLogin = async (event) => {
     event.preventDefault();
+    
+    if (!termsAccepted) {
+      alert("Please accept the Terms and Conditions to continue");
+      return;
+    }
+    
     const endpoint = currState === "Login" ? "/api/user/login" : "/api/user/register";
     const endpointUrl = url + endpoint;
 
-    
+    try {
       const response = await axios.post(endpointUrl, data);
 
       if (response.data.success) {
@@ -37,7 +46,10 @@ const LoginPopup = ({ setShowLogin }) => {
       } else {
         alert(response.data.message);
       }
-     
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("An error occurred during login");
+    }
   };
 
   return (
@@ -54,17 +66,30 @@ const LoginPopup = ({ setShowLogin }) => {
         </div>
         <button type='submit'>{currState === "Sign Up" ? "Create account" : "Login"}</button>
         <div className="login-popup-condition">
-          <input type="checkbox" required />
-          <p>By continuing, I agree to the terms of use & privacy policy.</p>
+          <input 
+            type="checkbox" 
+            checked={termsAccepted}
+            onChange={() => setTermsAccepted(!termsAccepted)}
+            required 
+          />
+          <p>
+            By continuing, I agree to the <span className="terms-link" onClick={() => setShowTerms(true)}>terms of use & privacy policy</span>.
+          </p>
         </div>
         {currState === "Login" ?
           <p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span></p> :
           <p>Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span></p>
         }
       </form>
+      
+      {showTerms && <TermsConditions onClose={() => {
+        setShowTerms(false);
+        setTermsAccepted(true);
+      }} />}
     </div>
   );
 };
+
 LoginPopup.propTypes = {
   setShowLogin: PropTypes.func.isRequired
 };
