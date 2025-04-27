@@ -3,14 +3,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Set mongoose options globally
-mongoose.set('strictQuery', false);
-
-// Connection options with increased timeouts
+// Connection options - remove deprecated options
 const connectionOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // Increased from 10000
+    // Remove useNewUrlParser and useUnifiedTopology as they're deprecated in MongoDB driver v4.0.0+
+    serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
     connectTimeoutMS: 30000,
     heartbeatFrequencyMS: 30000,
@@ -29,7 +25,7 @@ export const connectDB = async (retryCount = 0) => {
         // Get MongoDB URI from env or use default
         const mongoUri = process.env.MONGO_URI || 'mongodb+srv://manojkrishna991:Manoj_991@cluster0.8rrk6th.mongodb.net/food-delivery';
         
-        // Attempt connection
+        // Attempt connection with updated options
         const conn = await mongoose.connect(mongoUri, connectionOptions);
         
         console.log(`MongoDB Connected: ${conn.connection.host}`);
@@ -58,7 +54,7 @@ export const connectDB = async (retryCount = 0) => {
         try {
             console.log("Attempting to connect to local MongoDB...");
             const localConn = await mongoose.connect('mongodb://127.0.0.1:27017/food-delivery', {
-                ...connectionOptions,
+                // Remove deprecated options from local connection too
                 serverSelectionTimeoutMS: 5000 // Shorter timeout for local
             });
             
