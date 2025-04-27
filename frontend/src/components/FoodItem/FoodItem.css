@@ -146,3 +146,58 @@
 .add-to-cart-animation {
     animation: addToCartPulse 0.5s ease;
 }
+
+/* Dark mode styles */
+.dark-mode .food-item {
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  background-color: #262626; /* Add darker background color for cards */
+}
+
+.dark-mode .food-item:hover {
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+  background-color: #2d2d2d; /* Slightly lighter on hover */
+}
+
+.dark-mode .food-item-info {
+  background-color: #262626; /* Match the card background */
+}
+
+.dark-mode .food-item:hover .food-item-info {
+  background-color: #2d2d2d; /* Slightly lighter on hover */
+}
+
+.dark-mode .food-item-name-rating p {
+  color: var(--text-color);
+}
+
+.dark-mode .food-item:hover .food-item-name-rating p {
+  color: var(--primary-color);
+}
+
+.dark-mode .food-item-descr {
+  color: #d1d1d1; /* Lighter color for better visibility in dark mode */
+}
+
+.dark-mode .food-item-price {
+  color: var(--primary-color);
+}
+
+/* Ensure the counter is visible in dark mode */
+.dark-mode .food-item-counter {
+  background-color: #333333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .food-item-counter p {
+  color: white;
+}
+
+/* Keep add icon white in dark mode */
+.dark-mode .food-item-img-container .add {
+  filter: none; /* Preserve original color */
+}
+
+/* Keep counter buttons original color */
+.dark-mode .food-item-counter img {
+  filter: none; /* Preserve original button colors */
+}

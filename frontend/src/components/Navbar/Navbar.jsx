@@ -4,6 +4,7 @@ import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 
 const Navbar = ({ setShowLogin }) => { 
     const [menu, setMenu] = useState("home");
@@ -185,6 +186,7 @@ const Navbar = ({ setShowLogin }) => {
                 <a href='#footer' onClick={() => setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>Contact Us</a>
             </ul>
             <div className="navbar-right">
+                <DarkModeToggle />
                 <div className="navbar-search">
                     <img 
                         src={assets.search_icon} 

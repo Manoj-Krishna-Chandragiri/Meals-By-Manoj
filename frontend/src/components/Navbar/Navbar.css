@@ -149,7 +149,6 @@
     right: 75px; /* Position to the left of the search button */
     top: 50%;
     transform: translateY(-50%);
-    background: none;
     border: none;
     font-size: 18px;
     cursor: pointer;
@@ -374,4 +373,78 @@
     .navbar-menu{
         display: none;
     }
+}
+
+/* Dark mode styles */
+.dark-mode .navbar {
+    background-color: var(--bg-color);
+}
+
+.dark-mode .navbar-menu {
+    color: var(--text-color);
+}
+
+.dark-mode .navbar .active {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.dark-mode .navbar button {
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+}
+
+.dark-mode .navbar button:hover {
+    background-color: var(--hover-bg-color);
+}
+
+/* Make the cart dot more visible in dark mode */
+.dark-mode .navbar-search-icon .dot {
+  background-color: #ff6347;
+  border: 1px solid white;
+}
+
+/* Keep navigation text visible */
+.dark-mode .navbar-menu a {
+  color: var(--text-color);
+}
+
+/* Dark mode styles for search components */
+.dark-mode .search-container {
+  background-color: var(--card-bg-color);
+}
+
+.dark-mode .search-form input[type="text"] {
+  background-color: var(--hover-bg-color);
+  color: var(--text-color);
+}
+
+/* Keep search button orange in dark mode */
+.dark-mode .search-submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.dark-mode .clear-search:hover {
+  background-color: #ff3d21;
+}
+.dark-mode .clear-search {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .dark-mode .search-submit-btn:hover {
+    background-color: #ff3d21;
+  }
+/* Dark mode for search suggestions */
+.dark-mode .search-suggestions {
+  background-color: var(--card-bg-color);
+}
+
+.dark-mode .search-suggestion-item {
+  border-color: var(--border-color);
+}
+
+.dark-mode .search-suggestion-item:hover {
+  background-color: var(--hover-bg-color);
 }

@@ -297,3 +297,92 @@
         gap: 5px;
     }
 }
+
+/* Dark mode styles */
+.dark-mode .list-table-format {
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.dark-mode .list-table-format.title {
+  background-color: var(--hover-bg-color);
+}
+
+.dark-mode .list-table-format:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.dark-mode .search-input, 
+.dark-mode .category-filter {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.dark-mode .refresh-btn {
+  background-color: var(--primary-color);
+}
+
+.dark-mode .refresh-btn:hover {
+  background-color: var(--button-hover);
+}
+
+.dark-mode .edit-btn {
+  background-color: #3d8b3d;
+}
+
+.dark-mode .edit-btn:hover {
+  background-color: #2d682d;
+}
+
+.dark-mode .delete-btn {
+  background-color: #c82333;
+}
+
+.dark-mode .delete-btn:hover {
+  background-color: #a71d2a;
+}
+
+.dark-mode .list-summary {
+  color: var(--secondary-color);
+}
+
+.dark-mode .sortable:hover {
+  color: var(--primary-color);
+}
+
+.dark-mode .item-description {
+  color: var(--secondary-color);
+}
+
+.dark-mode .no-items-found {
+  background-color: var(--hover-bg-color);
+  border-color: var(--border-color);
+  color: var(--secondary-color);
+}
+
+/* Dark mode for edit modal */
+.dark-mode .edit-modal {
+  background-color: var(--card-bg-color);
+}
+
+.dark-mode .edit-modal-header {
+  border-color: var(--border-color);
+}
+
+.dark-mode .form-group label {
+  color: var(--text-color);
+}
+
+.dark-mode .close-modal {
+  color: var(--text-color);
+}
+
+.dark-mode .cancel-btn {
+  background-color: #444444;
+  color: var(--text-color);
+}
+
+.dark-mode .cancel-btn:hover {
+  background-color: #555555;
+}

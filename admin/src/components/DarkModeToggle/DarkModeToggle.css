@@ -1,0 +1,86 @@
+.dark-mode-toggle {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.dark-mode-toggle-checkbox {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.dark-mode-toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  border-radius: 26px;
+  background-color: #e8e8e8;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3) inset;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle-inner {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Move the toggle when checkbox is checked */
+.dark-mode-toggle-checkbox:checked + .dark-mode-toggle-label {
+  background-color: #36393f;
+}
+
+.dark-mode-toggle-checkbox:checked + .dark-mode-toggle-label .dark-mode-toggle-inner {
+  transform: translateX(24px);
+  background-color: #484b51;
+}
+
+/* Sun and moon icons */
+.dark-mode-toggle-switch {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sun-icon {
+  position: absolute;
+  color: #f1c40f;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.moon-icon {
+  position: absolute;
+  color: #f5f3ce;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dark-mode-toggle-checkbox:checked + .dark-mode-toggle-label .sun-icon {
+  opacity: 0;
+}
+
+.dark-mode-toggle-checkbox:checked + .dark-mode-toggle-label .moon-icon {
+  opacity: 1;
+}
+
+/* Focus styles for accessibility */
+.dark-mode-toggle-checkbox:focus + .dark-mode-toggle-label {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}

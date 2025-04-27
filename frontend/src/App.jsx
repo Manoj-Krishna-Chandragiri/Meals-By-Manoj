@@ -8,18 +8,18 @@ import Footer from './components/Footer/Footer'
 import LoginPopup from './components/LoginPopUp/LoginPopup'
 import Verify from './pages/Verify/Verify'
 import MyOrders from './pages/MyOrders/MyOrders'
+import { DarkModeProvider } from './context/DarkModeContext'
 
 const App = () => {
-
   const [showLogin,setShowLogin] = useState(false)
 
   return (
-    <>
-    {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
+    <DarkModeProvider>
+      {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : <></>}
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
-          < Route path='/' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/order' element={<PlaceOrder />} />
           <Route path='/verify' element={<Verify/>}/>
@@ -27,8 +27,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
-    </>
-
+    </DarkModeProvider>
   )
 }
 
