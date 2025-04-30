@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DarkModeProvider } from './context/DarkModeContext'
 
 const App = () => {
-  const url = "http://localhost:4000"
+  const url = "https://meals-by-manoj-backend.onrender.com"
 
   return (
     <DarkModeProvider>

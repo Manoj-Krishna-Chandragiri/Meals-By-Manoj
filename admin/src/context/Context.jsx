@@ -13,7 +13,7 @@ export const ContextProvider = ({children}) => {
     // Use dynamic URL that works for both dev and production
     const url = window.location.hostname === 'localhost' 
         ? "http://localhost:4000" 
-        : "https://food-delivery-backend-a3p8.onrender.com";
+        : "https://meals-by-manoj-backend.onrender.com";
     
     // Add function to fetch food items
     const fetchFoodItems = useCallback(async () => {

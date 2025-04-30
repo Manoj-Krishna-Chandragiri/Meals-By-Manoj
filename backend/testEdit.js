@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Test function to verify the edit endpoint
 const testEditEndpoint = async () => {
-  const url = 'http://localhost:4000';
+  const url = 'https://meals-by-manoj-backend.onrender.com';
   
   try {
     // First get a list of food items

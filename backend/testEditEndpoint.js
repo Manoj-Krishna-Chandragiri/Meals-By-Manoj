@@ -6,7 +6,7 @@ async function testEditEndpoint() {
     try {
         console.log("Testing the edit endpoint directly...");
         
-        const url = 'http://localhost:4000';
+        const url = 'https://meals-by-manoj-backend.onrender.com';
         
         // First, get all food items
         console.log("\n1. Getting list of food items...");
