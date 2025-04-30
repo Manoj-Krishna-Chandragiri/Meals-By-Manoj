@@ -192,3 +192,19 @@ hr{
   background-color: var(--primary-color);
   color: #ffffff;
 }
+
+/* Add these rules to your global CSS file */
+
+/* Override dark mode button styles for Add Food Item section */
+.dark-mode .add-food-tab.active,
+.dark-mode .manage-category-tab.active {
+  background-color: tomato !important;
+  color: white !important;
+  border-color: tomato !important;
+}
+
+/* Hover state for buttons in dark mode */
+.dark-mode .add-food-tab:hover,
+.dark-mode .manage-category-tab:hover {
+  background-color: rgba(255, 99, 71, 0.8) !important;
+}

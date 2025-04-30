@@ -334,10 +334,11 @@
   transition: all 0.3s ease;
 }
 
+/* Update active tab styling to use tomato color */
 .add-tabs button.active {
-  background-color: #ff4e4e; /* Orange background for active tab */
+  background-color: tomato !important; /* Changed from #ff4e4e to tomato */
   color: white !important; /* Force white text for active tab */
-  box-shadow: 0 4px 8px rgba(255, 78, 78, 0.2);
+  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.2); /* Adjusted shadow to match tomato color */
 }
 
 .add-tabs button:hover:not(.active) {
@@ -352,10 +353,33 @@
 }
 
 .dark-mode .add-tabs button.active {
-  background-color: #ff4e4e; /* Keep orange background in dark mode */
+  background-color: tomato !important; /* Changed from #ff4e4e to tomato in dark mode as well */
   color: white !important;
+  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.3); /* Slightly stronger shadow for dark mode */
 }
 
 .dark-mode .add-tabs button:hover:not(.active) {
   background-color: #444;
+}
+
+/* Remove black background for selected buttons in dark mode */
+.dark-mode .add-food-tab.active,
+.dark-mode .manage-category-tab.active {
+  background-color: tomato !important; /* Use same orange color as light theme */
+  color: white !important; /* Ensure text is visible on dark background */
+  border-color: tomato !important;
+}
+
+/* Hover state for button in dark mode */
+.dark-mode .add-food-tab:hover,
+.dark-mode .manage-category-tab:hover {
+  background-color: rgba(255, 99, 71, 0.8) !important; /* Slightly transparent tomato */
+}
+
+/* Make tab buttons more visible in dark mode */
+.dark-mode .add-food-tab,
+.dark-mode .manage-category-tab {
+  color: #e0e0e0 !important;
+  border-color: #666 !important;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
