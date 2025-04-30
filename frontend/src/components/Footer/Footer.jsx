@@ -1,17 +1,35 @@
 import React from 'react'
 import './Footer.css'
 import { assets } from '../../assets/assets'
+
 const Footer = () => {
+    // Create direct references to the deployed URLs to avoid path resolution issues
+    const logoUrl = window.location.hostname === 'localhost' 
+        ? assets.logo 
+        : 'https://meals-by-manoj-frontend.onrender.com/assets/logo.png';
+
+    const facebookIcon = window.location.hostname === 'localhost'
+        ? assets.facebook_icon
+        : 'https://meals-by-manoj-frontend.onrender.com/assets/facebook_icon.png';
+
+    const twitterIcon = window.location.hostname === 'localhost'
+        ? assets.twitter_icon
+        : 'https://meals-by-manoj-frontend.onrender.com/assets/twitter_icon.png';
+
+    const linkedinIcon = window.location.hostname === 'localhost'
+        ? assets.linkedin_icon
+        : 'https://meals-by-manoj-frontend.onrender.com/assets/linkedin_icon.png';
+
     return (
         <div className='footer' id='footer'>
             <div className="footer-content">
                 <div className="footer-content-left">
-                    <img src={assets.logo} alt="" />
+                    <img src={logoUrl} alt="Meals By Manoj Logo" className="footer-logo" />
                     <p>Welcome to our food delivery service. We strive to bring you the best culinary experiences from local restaurants to your doorstep. Enjoy fast delivery, excellent customer service, and a wide variety of cuisine options.</p>
                     <div className="footer-social-icons">
-                        <img src={assets.facebook_icon} alt="" />
-                        <img src={assets.twitter_icon} alt="" />
-                        <img src={assets.linkedin_icon} alt="" />
+                        <img src={facebookIcon} alt="Facebook" />
+                        <img src={twitterIcon} alt="Twitter" />
+                        <img src={linkedinIcon} alt="LinkedIn" />
                     </div>
                 </div>
                 <div className="footer-content-center">
