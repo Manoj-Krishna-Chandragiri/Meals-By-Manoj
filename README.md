@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Food Delivery Application
 
 A full-stack food delivery application with customer-facing frontend, admin panel, and backend API.
@@ -98,3 +99,6 @@ cd frontend && npm run dev
 - Manage food categories
 - View and manage orders
 - Update order status
+=======
+# Meals-By-Manoj
+>>>>>>> 0239e0eab54c160c3410aed0519e827099823b19
