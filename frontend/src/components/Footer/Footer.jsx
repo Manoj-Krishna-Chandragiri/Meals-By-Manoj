@@ -3,33 +3,19 @@ import './Footer.css'
 import { assets } from '../../assets/assets'
 
 const Footer = () => {
-    // Create direct references to the deployed URLs to avoid path resolution issues
-    const logoUrl = window.location.hostname === 'localhost' 
-        ? assets.logo 
-        : 'https://meals-by-manoj-frontend.onrender.com/assets/logo.png';
-
-    const facebookIcon = window.location.hostname === 'localhost'
-        ? assets.facebook_icon
-        : 'https://meals-by-manoj-frontend.onrender.com/assets/facebook_icon.png';
-
-    const twitterIcon = window.location.hostname === 'localhost'
-        ? assets.twitter_icon
-        : 'https://meals-by-manoj-frontend.onrender.com/assets/twitter_icon.png';
-
-    const linkedinIcon = window.location.hostname === 'localhost'
-        ? assets.linkedin_icon
-        : 'https://meals-by-manoj-frontend.onrender.com/assets/linkedin_icon.png';
-
+    // Use a more reliable approach for assets by importing them directly
+    // This ensures webpack/vite processes them correctly
     return (
         <div className='footer' id='footer'>
             <div className="footer-content">
                 <div className="footer-content-left">
-                    <img src={logoUrl} alt="Meals By Manoj Logo" className="footer-logo" />
+                    {/* Use the imported assets directly - this works better with bundlers */}
+                    <img src={assets.logo} alt="Meals By Manoj Logo" className="footer-logo" />
                     <p>Welcome to our food delivery service. We strive to bring you the best culinary experiences from local restaurants to your doorstep. Enjoy fast delivery, excellent customer service, and a wide variety of cuisine options.</p>
                     <div className="footer-social-icons">
-                        <img src={facebookIcon} alt="Facebook" />
-                        <img src={twitterIcon} alt="Twitter" />
-                        <img src={linkedinIcon} alt="LinkedIn" />
+                        <img src={assets.facebook_icon} alt="Facebook" />
+                        <img src={assets.twitter_icon} alt="Twitter" />
+                        <img src={assets.linkedin_icon} alt="LinkedIn" />
                     </div>
                 </div>
                 <div className="footer-content-center">
