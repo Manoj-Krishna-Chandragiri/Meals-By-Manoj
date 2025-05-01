@@ -1,4 +1,3 @@
-/* Improved order item styling */
 .order-item {
     display: grid;
     grid-template-columns: 0.4fr 2fr 0.6fr 0.6fr 0.8fr;
@@ -47,7 +46,6 @@
     font-size: 14px;
 }
 
-/* Dark mode improvements */
 .dark-mode .order-item {
     background-color: #262626;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);

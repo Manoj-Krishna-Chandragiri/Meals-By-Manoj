@@ -3,9 +3,8 @@ import userModel from "../models/userModel.js";
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-//placing user order from frontend
+
 const placeOrder = async (req,res) => {
-    // Change from hardcoded external URL to relative path
     const frontend_url = req.headers.origin || "https://meals-by-manoj-frontend.onrender.com"
      
     try {
@@ -68,8 +67,6 @@ const verifyOrder = async (req,res) => {
       }
 }
 
-//users order for frontend
-
 const userOrders = async (req,res) => {
    try {
     const orders = await orderModel.find({userId:req.body.userId})
@@ -81,7 +78,6 @@ const userOrders = async (req,res) => {
    }
 }
 
-// Listing orders for admin panel
 const listOrders = async (req,res) => {
     try {
         const orders = await orderModel.find({});
@@ -93,7 +89,7 @@ const listOrders = async (req,res) => {
     }
 
 }
-//api for updating order status
+
 const updateStatus = async (req,res) => {
     try {
         await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})

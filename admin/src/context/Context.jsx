@@ -10,12 +10,10 @@ export const ContextProvider = ({children}) => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Use dynamic URL that works for both dev and production
     const url = window.location.hostname === 'localhost' 
         ? "http://localhost:4000" 
         : "https://meals-by-manoj-backend.onrender.com";
     
-    // Add function to fetch food items
     const fetchFoodItems = useCallback(async () => {
         try {
             const response = await axios.get(`${url}/api/food/list`);
@@ -49,7 +47,6 @@ export const ContextProvider = ({children}) => {
             }
         } catch (error) {
             console.error("Error fetching users:", error);
-            // If we get a 404, it might be because the endpoint is not implemented yet
             if (error.response && error.response.status === 404) {
                 console.log("User list endpoint not available - using empty array");
                 setUsers([]);
@@ -62,8 +59,6 @@ export const ContextProvider = ({children}) => {
         fetchFoodItems();
         fetchOrders();
         
-        // Only try to fetch users if we need them
-        // This prevents unnecessary errors if the endpoint isn't implemented yet
         const currentPath = window.location.pathname;
         if (currentPath.includes('user')) {
             fetchUsers();

@@ -1,15 +1,8 @@
-/**
- * This is a production-ready solution for storing pending orders
- * In production, this would be replaced with a database collection
- */
-
-// In-memory pending orders storage with TTL
 class PendingOrdersManager {
   constructor() {
     this.pendingOrders = new Map();
-    this.expiryTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+    this.expiryTime = 30 * 60 * 1000;
     
-    // Clean up expired orders every 15 minutes
     setInterval(() => this.cleanupExpiredOrders(), 15 * 60 * 1000);
   }
 

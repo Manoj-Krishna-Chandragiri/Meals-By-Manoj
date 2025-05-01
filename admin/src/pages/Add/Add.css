@@ -1,7 +1,7 @@
 .add{
-    max-width: 800px; /* Limit maximum width */
-    width: 90%; /* Use 90% of container width up to max-width */
-    margin: 0 auto; /* Center the component */
+    max-width: 800px;
+    width: 90%; 
+    margin: 0 auto; 
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -28,9 +28,8 @@
     padding: 10px;
 }
 
-/* Improved buttons styling */
 .new-category-btn {
-  background-color: #3498db !important; /* Blue color */
+  background-color: #3498db !important;
   color: white !important;
   border: none;
   border-radius: 4px;
@@ -46,9 +45,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Make ADD button green in both themes */
 .add-btn {
-  background-color: #2ecc71 !important; /* Green color */
+  background-color: #2ecc71 !important;
   color: white !important;
   border: none;
   border-radius: 6px;
@@ -58,11 +56,11 @@
   transition: all 0.3s ease;
   margin-top: 20px;
   cursor: pointer;
-  width: auto !important; /* Override any full width */
-  max-width: 150px; /* Limit the width */
-  align-self: flex-start; /* Align to the left */
-  margin-left: 0; /* Ensure left alignment */
-  display: inline-block; /* Keep it inline */
+  width: auto !important;
+  max-width: 150px;
+  align-self: flex-start;
+  margin-left: 0;
+  display: inline-block;
 }
 
 .add-btn:hover {
@@ -71,7 +69,6 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Category management styling improvements */
 .category-manager {
   padding: 25px;
   background-color: #f9f9f9;
@@ -175,7 +172,6 @@
   transform: translateY(-2px);
 }
 
-/* Dark mode styles */
 .dark-mode .add {
   background-color: #1a1a1a;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -216,20 +212,19 @@
   color: #f1c40f;
 }
 
-/* Make current categories more visible in dark mode */
 .dark-mode .categories-list {
-  background-color: #1a1a1a; /* Darker background */
+  background-color: #1a1a1a;
 }
 
 .dark-mode .categories-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px; /* Slightly increased gap for better separation */
+  gap: 12px;
   margin-top: 15px;
 }
 
 .dark-mode .category-item {
-  background-color: #333333; /* Dark gray background */
+  background-color: #333333;
   color: #e0e0e0;
   padding: 8px 15px;
   border-radius: 6px;
@@ -244,7 +239,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Enhance category items in light mode too for consistency */
 .category-item {
   background-color: #f0f0f0;
   color: #333;
@@ -261,9 +255,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Keep buttons consistent in dark mode */
 .dark-mode .add-btn {
-  background-color: #2ecc71 !important; /* Keep green in dark mode */
+  background-color: #2ecc71 !important;
   color: white !important;
 }
 
@@ -272,7 +265,7 @@
 }
 
 .dark-mode .new-category-btn {
-  background-color: #3498db !important; /* Keep blue in dark mode */
+  background-color: #3498db !important;
   color: white !important;
 }
 
@@ -298,7 +291,6 @@
   background-color: #c0392b !important;
 }
 
-/* Improved form styling for dark mode */
 .dark-mode .add-product-name input,
 .dark-mode .add-product-description textarea,
 .dark-mode .add-category select,
@@ -315,7 +307,6 @@
   color: #e0e0e0;
 }
 
-/* Improved tab styling with white text for the active tab */
 .add-tabs {
   display: flex;
   gap: 10px;
@@ -334,11 +325,10 @@
   transition: all 0.3s ease;
 }
 
-/* Update active tab styling to use tomato color */
 .add-tabs button.active {
-  background-color: tomato !important; /* Changed from #ff4e4e to tomato */
-  color: white !important; /* Force white text for active tab */
-  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.2); /* Adjusted shadow to match tomato color */
+  background-color: tomato !important;
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.2);
 }
 
 .add-tabs button:hover:not(.active) {
@@ -346,37 +336,33 @@
   transform: translateY(-2px);
 }
 
-/* Dark mode styles */
 .dark-mode .add-tabs button {
   background-color: #333;
   color: #e0e0e0;
 }
 
 .dark-mode .add-tabs button.active {
-  background-color: tomato !important; /* Changed from #ff4e4e to tomato in dark mode as well */
+  background-color: tomato !important;
   color: white !important;
-  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.3); /* Slightly stronger shadow for dark mode */
+  box-shadow: 0 4px 8px rgba(255, 99, 71, 0.3);
 }
 
 .dark-mode .add-tabs button:hover:not(.active) {
   background-color: #444;
 }
 
-/* Remove black background for selected buttons in dark mode */
 .dark-mode .add-food-tab.active,
 .dark-mode .manage-category-tab.active {
-  background-color: tomato !important; /* Use same orange color as light theme */
-  color: white !important; /* Ensure text is visible on dark background */
+  background-color: tomato !important;
+  color: white !important;
   border-color: tomato !important;
 }
 
-/* Hover state for button in dark mode */
 .dark-mode .add-food-tab:hover,
 .dark-mode .manage-category-tab:hover {
-  background-color: rgba(255, 99, 71, 0.8) !important; /* Slightly transparent tomato */
+  background-color: rgba(255, 99, 71, 0.8) !important;
 }
 
-/* Make tab buttons more visible in dark mode */
 .dark-mode .add-food-tab,
 .dark-mode .manage-category-tab {
   color: #e0e0e0 !important;

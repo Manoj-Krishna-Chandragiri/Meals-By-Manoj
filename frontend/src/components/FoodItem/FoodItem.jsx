@@ -11,11 +11,9 @@ const FoodItem = ({id, name, price, description, image}) => {
     const handleAddToCart = () => {
         addToCart(id);
         
-        // Add animation class
         if (itemRef.current) {
             itemRef.current.classList.add('add-to-cart-animation');
             
-            // Remove class after animation completes
             setTimeout(() => {
                 if (itemRef.current) {
                     itemRef.current.classList.remove('add-to-cart-animation');
@@ -24,13 +22,10 @@ const FoodItem = ({id, name, price, description, image}) => {
         }
     };
 
-    // Handle potentially missing images and SVG data URIs
     const getImageUrl = (image) => {
-        // If image is a data URI (SVG), use it directly
         if (image && (image.startsWith('data:image') || image.startsWith('data:image/svg+xml'))) {
             return image;
         }
-        // Otherwise, use the backend URL
         return `${url}/images/${image}`;
     };
 

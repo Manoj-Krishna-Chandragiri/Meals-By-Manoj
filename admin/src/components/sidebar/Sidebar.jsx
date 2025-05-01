@@ -1,6 +1,3 @@
-// This file is likely unused due to path case mismatch (lowercase 'sidebar' vs. uppercase 'Sidebar')
-// The App.jsx imports Sidebar, but this file's path has a lowercase directory name
-
 import React from 'react'
 import './Sidebar.css'
 import { assets } from '../../assets/assets'

@@ -23,12 +23,10 @@ const List = ({url}) => {
 
   const [categories, setCategories] = useState(['All']);
 
-  // Add a new function to fetch categories from the API
   const fetchCategories = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/api/food/categories`);
       if (response.data.success) {
-        // Add 'All' category for filtering but preserve the original categories list
         setCategories(['All', ...response.data.categories]);
       }
     } catch (error) {
@@ -36,7 +34,6 @@ const List = ({url}) => {
     }
   }, [url]);
 
-  // Get unique categories from food items
   const allCategories = useMemo(() => {
     const cats = ['All', ...new Set(list.map(item => item.category))];
     return cats;
@@ -71,9 +68,7 @@ const List = ({url}) => {
     }
   }
 
-  // Update the openEditModal function to fetch fresh categories
   const openEditModal = async (item) => {
-    // Fetch the latest categories before opening the modal
     await fetchCategories();
 
     setEditingItem(item);
@@ -86,13 +81,11 @@ const List = ({url}) => {
     setIsEditModalOpen(true);
   };
 
-  // Close edit modal
   const closeEditModal = () => {
     setIsEditModalOpen(false);
     setEditingItem(null);
   };
 
-  // Handle edit form input changes
   const handleEditInputChange = (e) => {
     const { name, value } = e.target;
     setEditFormData({
@@ -101,11 +94,9 @@ const List = ({url}) => {
     });
   };
 
-  // Submit edited food item - simplified for reliability
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     
-    // Create payload with numeric price
     const payload = {
       id: editingItem._id,
       name: editFormData.name,
@@ -114,7 +105,6 @@ const List = ({url}) => {
       category: editFormData.category
     };
     
-    // Show loading toast
     const loadingToast = toast.loading("Updating food item...");
     
     try {
@@ -128,7 +118,6 @@ const List = ({url}) => {
         body: JSON.stringify(payload)
       });
       
-      // Dismiss loading toast
       toast.dismiss(loadingToast);
       
       if (response.ok) {
@@ -155,12 +144,10 @@ const List = ({url}) => {
 
   useEffect(() => {
     fetchList();
-    fetchCategories(); // Fetch categories on component load
+    fetchCategories();
   }, [fetchList, fetchCategories]);
   
-  // Filter and sort food items
   const filteredAndSortedList = useMemo(() => {
-    // First filter by search query and category
     const filtered = list.filter(item => {
       const matchesSearch = searchQuery === '' || 
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -171,12 +158,10 @@ const List = ({url}) => {
       return matchesSearch && matchesCategory;
     });
     
-    // Then sort by selected column and order
     return filtered.sort((a, b) => {
       let valueA = a[sortBy];
       let valueB = b[sortBy];
       
-      // For string values
       if (typeof valueA === 'string') {
         valueA = valueA.toLowerCase();
         valueB = valueB.toLowerCase();
@@ -190,7 +175,6 @@ const List = ({url}) => {
     });
   }, [list, searchQuery, selectedCategory, sortBy, sortOrder]);
   
-  // Toggle sort order and column
   const handleSort = (column) => {
     if (sortBy === column) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -200,7 +184,6 @@ const List = ({url}) => {
     }
   };
   
-  // Get sort indicator
   const getSortIndicator = (column) => {
     if (sortBy !== column) return null;
     return sortOrder === 'asc' ? ' ▲' : ' ▼';
@@ -287,7 +270,6 @@ const List = ({url}) => {
         )}
       </div>
 
-      {/* Edit Modal */}
       {isEditModalOpen && editingItem && (
         <div className="edit-modal-overlay">
           <div className="edit-modal">
@@ -327,7 +309,6 @@ const List = ({url}) => {
                   onChange={handleEditInputChange}
                   required
                 >
-                  {/* Use all categories except the 'All' filter option */}
                   {categories.filter(cat => cat !== 'All').map(category => (
                     <option key={category} value={category}>{category}</option>
                   ))}

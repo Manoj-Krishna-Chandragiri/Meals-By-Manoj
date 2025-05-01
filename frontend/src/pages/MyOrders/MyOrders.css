@@ -46,7 +46,6 @@
     }
 }
 
-/* Dark mode styles for better visibility */
 .dark-mode .my-orders-order {
   background-color: #262626;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -57,7 +56,6 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Improve text visibility in order items in dark mode */
 .dark-mode .my-orders-order p,
 .dark-mode .my-orders-order span,
 .dark-mode .my-orders-order-items,
@@ -67,9 +65,8 @@
   color: #ffffff !important;
 }
 
-/* Keep status colors visible */
 .dark-mode .my-orders-order-status span {
-  color: #5cb85c !important; /* Brighter green in dark mode */
+  color: #5cb85c !important;
 }
 
 .dark-mode .my-orders-order b {
@@ -77,7 +74,6 @@
   font-weight: 600;
 }
 
-/* Keep button styling consistent */
 .dark-mode .my-orders-order button {
   background-color: var(--primary-color);
   color: white;

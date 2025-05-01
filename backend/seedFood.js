@@ -5,14 +5,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
-// Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Define all food items
 const food_list = [
   {
     name: "Greek salad",
@@ -238,7 +235,6 @@ const food_list = [
     image: "food_32.png",
     category: "Noodles"
   },
-  // Add new biryani items
   {
     name: "Hyderabadi Biryani",
     description: "Aromatic basmati rice layered with spicy marinated meat, slow-cooked to perfection",
@@ -268,7 +264,6 @@ const food_list = [
     category: "Biryani"
   },
   
-  // Add new food items
   {
     name: "Margherita Pizza",
     description: "Classic pizza with tomato sauce, mozzarella, and fresh basil",
@@ -304,7 +299,6 @@ const food_list = [
     image: "food_41.png",
     category: "Dessert"
   },
-  // Add 10 more food items
   {
     name: "Classic Burger",
     description: "Juicy beef patty with fresh lettuce, tomato, and our special sauce on a toasted bun",
@@ -377,28 +371,22 @@ const food_list = [
   }
 ];
 
-// Connect to the database and seed data
 connectDB().then(async () => {
   console.log("Database connected for seeding");
   
   try {
-    // Delete existing food items
     await foodModel.deleteMany({});
     console.log("Deleted existing food items");
     
-    // Create uploads directory if it doesn't exist
     const uploadsDir = path.join(__dirname, 'uploads');
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
       console.log("Created uploads directory");
     }
     
-    // Copy images from frontend assets to backend uploads folder
     const frontendDir = path.join(__dirname, '..', 'frontend', 'src', 'assets');
     
-    // Insert all food items
     for (const item of food_list) {
-      // Copy image if it exists
       const sourceImagePath = path.join(frontendDir, item.image);
       const destImagePath = path.join(uploadsDir, item.image);
       
@@ -409,7 +397,6 @@ connectDB().then(async () => {
         console.log(`Warning: Source image not found: ${sourceImagePath}`);
       }
       
-      // Create and save food item
       const food = new foodModel({
         name: item.name,
         description: item.description,

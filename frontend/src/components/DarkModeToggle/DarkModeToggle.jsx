@@ -16,7 +16,6 @@ const DarkModeToggle = () => {
       />
       <label htmlFor="dark-mode-toggle-input" className="dark-mode-toggle-label">
         <div className="dark-mode-toggle-icon">
-          {/* Sun icon */}
           <svg 
             className="sun-icon" 
             xmlns="http://www.w3.org/2000/svg" 
@@ -38,7 +37,6 @@ const DarkModeToggle = () => {
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          {/* Moon icon */}
           <svg 
             className="moon-icon" 
             xmlns="http://www.w3.org/2000/svg" 

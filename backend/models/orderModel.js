@@ -10,6 +10,5 @@ const orderSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 });
 
-// Use this pattern to avoid model recompilation errors
 const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);
 export default orderModel;

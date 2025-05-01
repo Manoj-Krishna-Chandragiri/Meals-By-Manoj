@@ -37,15 +37,15 @@
     background-color: white;
     font-size: max(1vw,3px);
     border-radius: 15px;
-    cursor: pointer; /* Add pointer cursor */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .header-contents button:hover {
-    background-color: #f0f0f0; /* Subtle background change */
-    transform: translateY(-3px); /* Slight upward movement */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-    color: #333; /* Darker text on hover */
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
 .animated-text-container {
@@ -62,8 +62,8 @@
     position: relative;
     margin: 0;
     padding: 0;
-    line-height: 1.2; /* Tighten line spacing between the two lines */
-    white-space: nowrap; /* Ensure text and ellipsis stay on same line */
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 @media (max-width:1050px) {

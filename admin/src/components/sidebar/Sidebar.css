@@ -33,7 +33,6 @@
     
 }
 
-/* Improve sidebar icon visibility in both themes */
 .sidebar-option img {
     width: 22px;
     height: 22px;
@@ -41,22 +40,18 @@
     transition: filter 0.3s ease;
 }
 
-/* Make icons white in dark mode with higher specificity and !important */
 .dark-mode .sidebar .sidebar-options .sidebar-option img {
     filter: brightness(10) invert(1) !important;
 }
 
-/* Ensure active icons also appear white in dark mode */
 .dark-mode .sidebar .sidebar-options .sidebar-option.active img {
     filter: brightness(10) invert(1) !important;
 }
 
-/* Target base64 images specifically since they might be handled differently */
 .dark-mode .sidebar-option img[src^="data:image"] {
     filter: brightness(10) invert(1) !important;
 }
 
-/* Increase specificity even further for stubborn cases */
 html body .dark-mode .sidebar .sidebar-option img {
     filter: brightness(10) invert(1) !important;
 }

@@ -7,7 +7,7 @@
 
 .navbar .logo{
     width: auto;
-    height: 40px; /* Adjust this value as needed */
+    height: 40px;
     object-fit: contain;
 }
 
@@ -119,7 +119,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    width: 350px; /* Fixed width for the entire search container */
+    width: 350px;
     z-index: 100;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -128,26 +128,23 @@
     margin-top: 10px;
 }
 
-/* Search form styling */
 .search-form {
     display: flex;
     position: relative;
     width: 100%;
 }
 
-/* Input styling */
 .search-form input[type="text"] {
     width: 100%;
-    padding: 10px 40px 10px 10px; /* Right padding for the clear button */
+    padding: 10px 40px 10px 10px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
     outline: none;
 }
 
-/* Clear button styling */
 .clear-search {
     position: absolute;
-    right: 75px; /* Position to the left of the search button */
+    right: 75px;
     top: 50%;
     transform: translateY(-50%);
     border: none;
@@ -161,7 +158,6 @@
     color: #333;
 }
 
-/* Search button styling */
 .search-submit-btn {
     min-width: 70px;
     background-color: #ff4757;
@@ -176,9 +172,8 @@
     background-color: #ff6b81;
 }
 
-/* Search suggestions container */
 .search-suggestions {
-    width: 100%; /* Match the width of the form */
+    width: 100%;
     max-height: 250px;
     overflow-y: auto;
     background-color: white;
@@ -205,12 +200,10 @@
     margin-top: 4px;
 }
 
-/* If you have existing styles for the navbar-search, make sure they don't conflict */
 .navbar-search {
     position: relative;
 }
 
-/* Search suggestions styling */
 .search-suggestions {
     margin-top: 10px;
     border-top: 1px solid #eee;
@@ -376,7 +369,6 @@
     }
 }
 
-/* Dark mode styles */
 .dark-mode .navbar {
     background-color: var(--bg-color);
 }
@@ -399,18 +391,15 @@
     background-color: var(--hover-bg-color);
 }
 
-/* Make the cart dot more visible in dark mode */
 .dark-mode .navbar-search-icon .dot {
   background-color: #ff6347;
   border: 1px solid white;
 }
 
-/* Keep navigation text visible */
 .dark-mode .navbar-menu a {
   color: var(--text-color);
 }
 
-/* Dark mode styles for search components */
 .dark-mode .search-container {
   background-color: var(--card-bg-color);
 }
@@ -420,7 +409,6 @@
   color: var(--text-color);
 }
 
-/* Keep search button orange in dark mode */
 .dark-mode .search-submit-btn {
   background-color: var(--primary-color);
   color: white;
@@ -437,7 +425,7 @@
   .dark-mode .search-submit-btn:hover {
     background-color: #ff3d21;
   }
-/* Dark mode for search suggestions */
+
 .dark-mode .search-suggestions {
   background-color: var(--card-bg-color);
 }

@@ -4,17 +4,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
 
-// Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Create readline interface
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-// Create data directory if it doesn't exist
 const dataDir = path.join(__dirname, 'data', 'db');
 if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
@@ -30,7 +27,6 @@ rl.question('Do you want to start MongoDB locally? (y/n): ', (answer) => {
     if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
         console.log("\nStarting MongoDB...");
         
-        // Command to start MongoDB with the local data directory
         const mongoCommand = process.platform === 'win32' 
             ? `mongod --dbpath="${dataDir}"`
             : `mongod --dbpath="${dataDir}"`;
@@ -49,7 +45,6 @@ rl.question('Do you want to start MongoDB locally? (y/n): ', (answer) => {
         console.log("Now you can start the backend server with: npm run dev");
         console.log("\nPress Ctrl+C to stop MongoDB when you're done.");
         
-        // Keep the script running
         process.stdin.resume();
     } else {
         console.log("\nOK. You'll need to start MongoDB separately.");

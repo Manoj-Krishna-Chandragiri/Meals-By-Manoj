@@ -1,14 +1,12 @@
 import fetch from 'node-fetch';
 import { connectDB } from './config/db.js';
 
-// Test function for the edit endpoint
 async function testEditEndpoint() {
     try {
         console.log("Testing the edit endpoint directly...");
         
         const url = 'https://meals-by-manoj-backend.onrender.com';
         
-        // First, get all food items
         console.log("\n1. Getting list of food items...");
         const listResponse = await fetch(`${url}/api/food/list`);
         const listData = await listResponse.json();
@@ -18,11 +16,9 @@ async function testEditEndpoint() {
             return;
         }
         
-        // Get the first food item to edit
         const foodItem = listData.data[0];
         console.log(`✅ Found item to edit: ${foodItem.name} (ID: ${foodItem._id})`);
         
-        // Create edit payload
         const editPayload = {
             id: foodItem._id,
             name: `${foodItem.name} (Edited)`,
@@ -34,7 +30,6 @@ async function testEditEndpoint() {
         console.log("\n2. Testing the /api/food/edit endpoint...");
         console.log("Payload:", JSON.stringify(editPayload, null, 2));
         
-        // Send the edit request
         const editResponse = await fetch(`${url}/api/food/edit`, {
             method: 'POST',
             headers: {
@@ -60,6 +55,5 @@ async function testEditEndpoint() {
     }
 }
 
-// Run the test
 console.log("Starting edit endpoint test...");
 testEditEndpoint();

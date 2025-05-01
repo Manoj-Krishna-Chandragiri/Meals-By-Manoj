@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar/Navbar'
-import Sidebar from './components/sidebar/Sidebar' // Fix import path to match actual directory casing
+import Sidebar from './components/sidebar/Sidebar'
 import { Routes, Route } from 'react-router-dom'
 import Add from './pages/Add/Add'
 import List from './pages/List/List'

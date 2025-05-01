@@ -34,13 +34,10 @@ const FoodGallery = ({ foods }) => {
     return null;
   }
 
-  // Handle potentially missing images and SVG data URIs
   const getImageUrl = (image) => {
-    // If image is a data URI, use it directly
     if (image && (image.startsWith('data:image') || image.startsWith('data:image/svg+xml'))) {
       return image;
     }
-    // Otherwise, use the backend URL
     return `${url}/images/${image}`;
   };
 

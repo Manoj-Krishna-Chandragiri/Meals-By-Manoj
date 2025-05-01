@@ -5,6 +5,6 @@ const userRouter = express.Router();
 
 userRouter.post("/login", loginUser);
 userRouter.post("/register", registerUser);
-userRouter.get("/list", listUsers);  // Add the new route
+userRouter.get("/list", listUsers);
 
 export default userRouter;

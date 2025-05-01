@@ -17,14 +17,12 @@ const Navbar = ({ setShowLogin }) => {
     const {getTotalCartAmount, token, setToken} = useContext(StoreContext);
     const navigate = useNavigate();
 
-    // Generate search suggestions based on query
     useEffect(() => {
         if (searchQuery.trim() === "") {
             setSearchSuggestions([]);
             return;
         }
 
-        // Find matching food items
         const foodItems = document.querySelectorAll('.food-item');
         const suggestions = [];
 
@@ -39,7 +37,6 @@ const Navbar = ({ setShowLogin }) => {
             const description = descElement.textContent;
             const query = searchQuery.toLowerCase();
             
-            // Check if name or description matches the query
             if (name.toLowerCase().includes(query) || 
                 description.toLowerCase().includes(query)) {
                 suggestions.push({
@@ -50,93 +47,68 @@ const Navbar = ({ setShowLogin }) => {
             }
         });
 
-        // Limit to top 5 suggestions
         setSearchSuggestions(suggestions.slice(0, 5));
     }, [searchQuery]);
 
-    // Handle clicks outside of search container
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // If search is active and the click is outside the search container
             if (searchActive && 
                 searchContainerRef.current && 
                 !searchContainerRef.current.contains(event.target)) {
                 setSearchActive(false);
-                // Don't reset the search query when closing
-                // setSearchQuery("");
                 setSearchSuggestions([]);
             }
         };
         
-        // Add event listener when search is active
         if (searchActive) {
             document.addEventListener('mousedown', handleClickOutside);
         }
         
-        // Clean up the event listener
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [searchActive]);
 
-    // Handle search icon click
     const handleSearchIconClick = () => {
         setSearchActive(!searchActive);
         if (!searchActive) {
-            // Focus the input after rendering
             setTimeout(() => {
                 if (searchInputRef.current) {
                     searchInputRef.current.focus();
                     
-                    // If there's a previous query, update suggestions
                     if (searchQuery.trim() !== "") {
-                        // This will trigger the useEffect for suggestions
                         setSearchQuery(searchQuery);
                     }
                 }
             }, 100);
         }
-        // Don't reset search query when toggling search
-        // else {
-        //     setSearchQuery("");
-        // }
     };
 
-    // Handle search suggestion click
     const handleSuggestionClick = (itemId) => {
         const item = document.getElementById(itemId);
         if (item) {
-            // Remove previous highlights
             document.querySelectorAll('.food-item').forEach(i => {
                 i.classList.remove('highlight');
             });
             
-            // Highlight and scroll to the item
             item.classList.add('highlight');
             item.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
-            // Close search
             setSearchActive(false);
-            // Don't reset search query when selecting a suggestion
-            // setSearchQuery("");
             setSearchSuggestions([]);
         }
     };
 
-    // Handle search submission
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (searchQuery.trim() === "") return;
 
-        // Find and scroll to matching elements
         const foodItems = document.querySelectorAll('.food-item');
         let found = false;
 
         foodItems.forEach(item => {
-            // Remove previous highlights
             item.classList.remove('highlight');
             
-            // Get text content from name and description elements
             const nameElement = item.querySelector('.food-item-name-rating p');
             const descElement = item.querySelector('.food-item-descr');
             
@@ -146,7 +118,6 @@ const Navbar = ({ setShowLogin }) => {
             const description = descElement.textContent.toLowerCase();
             const query = searchQuery.toLowerCase();
             
-            // Check if the item matches the search query
             if (name.includes(query) || description.includes(query)) {
                 found = true;
                 item.classList.add('highlight');
@@ -156,15 +127,11 @@ const Navbar = ({ setShowLogin }) => {
         
         if (found) {
             setSearchActive(false);
-            // Don't reset search query when submitting a search
-            // setSearchQuery("");
         } else {
-            // Show not found message
             alert("No food items match your search. Try a different term.");
         }
     };
 
-    // Clear search - add a new function for explicitly clearing search
     const clearSearch = () => {
         setSearchQuery("");
         setSearchSuggestions([]);
@@ -216,7 +183,6 @@ const Navbar = ({ setShowLogin }) => {
                                 <button type="submit" className="search-submit-btn">Search</button>
                             </form>
                             
-                            {/* Search suggestions - use same width as form */}
                             {searchSuggestions.length > 0 && (
                                 <div className="search-suggestions">
                                     {searchSuggestions.map(suggestion => (

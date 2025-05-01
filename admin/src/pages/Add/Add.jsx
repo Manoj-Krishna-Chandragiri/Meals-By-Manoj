@@ -20,24 +20,20 @@ const Add = ({url}) => {
     category:"Salad"
   });
 
-  // Fetch existing categories when component mounts
   useEffect(() => {
     fetchCategories();
   }, [url]);
   
-  // Extract the fetchCategories function to be able to call it after adding new categories
   const fetchCategories = async () => {
     try {
       const response = await axios.get(`${url}/api/food/categories`);
       if (response.data.success) {
         setCategories(response.data.categories);
         
-        // If categories exist and we don't have a category selected, set the first one
         if (response.data.categories.length > 0 && !data.category) {
           setData(prev => ({...prev, category: response.data.categories[0]}));
         }
         
-        // Set a default category to delete if we don't have one yet
         if (response.data.categories.length > 0 && !categoryToDelete) {
           setCategoryToDelete(response.data.categories[0]);
         }
@@ -63,25 +59,20 @@ const Add = ({url}) => {
       const response = await axios.post(`${url}/api/food/addCategory`, { name: newCategory });
       
       if (response.data.success) {
-        // Use functional update to ensure we have the latest state
         setCategories(prevCategories => {
-          // Check if the category already exists to avoid duplicates
           if (!prevCategories.includes(newCategory)) {
             return [...prevCategories, newCategory];
           }
           return prevCategories;
         });
         
-        // Set the newly added category as the selected one
         setData(prev => ({ ...prev, category: newCategory }));
         
-        // Reset the new category input and hide it
         setNewCategory("");
         setShowNewCategoryInput(false);
         
         toast.success("New category added");
         
-        // Refresh categories from server to ensure consistency
         fetchCategories();
       } else {
         toast.error(response.data.message || "Failed to add category");
@@ -102,12 +93,10 @@ const Add = ({url}) => {
       toast.info(`Attempting to remove category: ${categoryToDelete}`);
       console.log("Sending request to:", `${url}/api/food/removeCategory`);
       
-      // Debug the URL and payload
       console.log("Server URL:", url);
       console.log("Full endpoint:", `${url}/api/food/removeCategory`);
       console.log("Request payload:", { name: categoryToDelete });
       
-      // Use fetch instead of axios as a troubleshooting step
       const response = await fetch(`${url}/api/food/removeCategory`, {
         method: 'POST',
         headers: {
@@ -123,10 +112,8 @@ const Add = ({url}) => {
       if (data.success) {
         toast.success(data.message || "Category removed successfully");
         
-        // Refresh categories list
         fetchCategories();
         
-        // If the deleted category was the currently selected one, reset it
         if (data.category === categoryToDelete) {
           if (data.categories && data.categories.length > 0) {
             setData(prev => ({ ...prev, category: data.categories[0] }));
@@ -190,7 +177,6 @@ const Add = ({url}) => {
       </div>
       
       {!showCategoryManager ? (
-        // Food Item Form
         <form className='flex-col' onSubmit={onSubmitHandler}>
           <div className="add-img-upload flex-col">
             <p>Upload Image</p>
@@ -279,7 +265,6 @@ const Add = ({url}) => {
           <button type='submit' className='add-btn'>ADD</button>
         </form>
       ) : (
-        // Category Management
         <div className="category-manager">
           <h3>Manage Categories</h3>
           <div className="category-add-section">

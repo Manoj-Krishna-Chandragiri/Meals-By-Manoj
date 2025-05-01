@@ -152,7 +152,6 @@
     border-radius: 4px;
 }
 
-/* Edit Modal Styles */
 .edit-modal-overlay {
     position: fixed;
     top: 0;
@@ -298,7 +297,6 @@
     }
 }
 
-/* Dark mode styles */
 .dark-mode .list-table-format {
   border-color: var(--border-color);
   color: var(--text-color);
@@ -361,7 +359,6 @@
   color: var(--secondary-color);
 }
 
-/* Dark mode for edit modal */
 .dark-mode .edit-modal {
   background-color: var(--card-bg-color);
 }

@@ -3,13 +3,10 @@ import './Footer.css'
 import { assets } from '../../assets/assets'
 
 const Footer = () => {
-    // Use a more reliable approach for assets by importing them directly
-    // This ensures webpack/vite processes them correctly
     return (
         <div className='footer' id='footer'>
             <div className="footer-content">
                 <div className="footer-content-left">
-                    {/* Use the imported assets directly - this works better with bundlers */}
                     <img src={assets.logo} alt="Meals By Manoj Logo" className="footer-logo" />
                     <p>Welcome to our food delivery service. We strive to bring you the best culinary experiences from local restaurants to your doorstep. Enjoy fast delivery, excellent customer service, and a wide variety of cuisine options.</p>
                     <div className="footer-social-icons">

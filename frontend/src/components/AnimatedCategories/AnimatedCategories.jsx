@@ -11,15 +11,12 @@ const AnimatedCategories = ({ onSelectCategory, selectedCategory }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch categories from the backend
         const fetchCategories = async () => {
             setLoading(true);
             try {
                 const response = await axios.get(`${url}/api/food/categories`);
                 if (response.data.success) {
-                    // Map categories to include images
                     const formattedCategories = response.data.categories.map((cat) => {
-                        // Match category name to existing menu items or use a default
                         let menuImage;
                         switch (cat.toLowerCase()) {
                             case 'salad':
@@ -68,7 +65,6 @@ const AnimatedCategories = ({ onSelectCategory, selectedCategory }) => {
                                 menuImage = assets.dessertFood1 || assets.food_40;
                                 break;
                             default:
-                                // Generate a colorful default icon for new categories
                                 const randomColor = Math.floor(Math.random() * 16777215).toString(16);
                                 menuImage = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23${randomColor}'/%3E%3Ctext x='50' y='55' font-size='14' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'%3E${cat.substring(0, 6)}%3C/text%3E%3C/svg%3E`;
                         }
@@ -79,7 +75,6 @@ const AnimatedCategories = ({ onSelectCategory, selectedCategory }) => {
                         };
                     });
 
-                    // Add "All" category at the beginning
                     setCategories([
                         { menu_name: "All", menu_image: assets.menu_all },
                         ...formattedCategories

@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-// Test function to verify the edit endpoint
 const testEditEndpoint = async () => {
   const url = 'https://meals-by-manoj-backend.onrender.com';
   
   try {
-    // First get a list of food items
     console.log("Fetching food items list...");
     const foodListResponse = await axios.get(`${url}/api/food/list`);
     
@@ -14,11 +12,9 @@ const testEditEndpoint = async () => {
       return;
     }
     
-    // Get the first food item
     const testItem = foodListResponse.data.data[0];
     console.log("Using test item:", testItem);
     
-    // Create the edit payload
     const editPayload = {
       id: testItem._id,
       name: `${testItem.name} (Edited)`,
@@ -29,7 +25,6 @@ const testEditEndpoint = async () => {
     
     console.log("Sending edit request with payload:", editPayload);
     
-    // Test the edit endpoint
     const editResponse = await axios.post(`${url}/api/food/edit`, editPayload);
     console.log("Edit response:", editResponse.data);
     
@@ -50,6 +45,5 @@ const testEditEndpoint = async () => {
   }
 };
 
-// Run the test
 console.log("Starting edit endpoint test...");
 testEditEndpoint();

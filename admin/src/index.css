@@ -70,14 +70,12 @@ hr{
   cursor: pointer;
 }
 
-/* Logo styling */
 .logo, img[src*="logo.png"] {
   width: auto;
-  height: 40px; /* Adjust this value as needed */
+  height: 40px;
   object-fit: contain;
 }
 
-/* Dark mode styles for specific components */
 .dark-mode button:not(.edit-btn):not(.delete-btn):not(.refresh-btn):not(.dark-mode-toggle-label) {
   background-color: var(--card-bg-color);
   border-color: var(--border-color);
@@ -91,13 +89,11 @@ hr{
   border-color: var(--border-color);
 }
 
-/* Toast notification dark mode */
 .dark-mode .Toastify__toast {
   background-color: var(--card-bg-color);
   color: var(--text-color);
 }
 
-/* Improved dark mode text visibility - admin specific */
 .dark-mode .sidebar-option p {
   color: #ffffff !important;
   font-weight: 500;
@@ -111,7 +107,6 @@ hr{
   color: #ffffff !important;
 }
 
-/* Improve visibility in list and tables */
 .dark-mode .list h2,
 .dark-mode .add h2,
 .dark-mode .add h3, 
@@ -126,7 +121,6 @@ hr{
   color: #e0e0e0 !important;
 }
 
-/* Better visibility for form labels and inputs */
 .dark-mode .add-product-name p,
 .dark-mode .add-product-description p,
 .dark-mode .add-category p,
@@ -142,7 +136,7 @@ hr{
 }
 
 .dark-mode .remove-category-warning p {
-  color: #ffcc00 !important; /* Yellow warning text */
+  color: #ffcc00 !important;
 }
 
 .dark-mode .categories-grid .category-item {
@@ -154,7 +148,6 @@ hr{
   display: inline-block;
 }
 
-/* Improve order item visibility */
 .dark-mode .order-item {
   background-color: #222222;
   border: 1px solid #444444;
@@ -167,7 +160,6 @@ hr{
   color: #ffffff !important;
 }
 
-/* Improve tabs visibility */
 .dark-mode .add-tabs button {
   background-color: #333333;
   color: #cccccc;
@@ -180,7 +172,6 @@ hr{
   border-color: var(--primary-color);
 }
 
-/* Better visibility for search and filter controls */
 .dark-mode .search-input,
 .dark-mode .category-filter {
   background-color: #333333;
@@ -193,9 +184,6 @@ hr{
   color: #ffffff;
 }
 
-/* Add these rules to your global CSS file */
-
-/* Override dark mode button styles for Add Food Item section */
 .dark-mode .add-food-tab.active,
 .dark-mode .manage-category-tab.active {
   background-color: tomato !important;
@@ -203,7 +191,6 @@ hr{
   border-color: tomato !important;
 }
 
-/* Hover state for buttons in dark mode */
 .dark-mode .add-food-tab:hover,
 .dark-mode .manage-category-tab:hover {
   background-color: rgba(255, 99, 71, 0.8) !important;

@@ -1,12 +1,9 @@
-// This is a simple script to test the edit endpoint directly
-
 import fetch from 'node-fetch';
 
 const testEditEndpoint = async () => {
   try {
     console.log("Testing edit endpoint...");
     
-    // First, get the list of food items
     console.log("Fetching food list...");
     const foodListResponse = await fetch('http://localhost:4000/api/food/list');
     const foodList = await foodListResponse.json();
@@ -16,11 +13,9 @@ const testEditEndpoint = async () => {
       return;
     }
     
-    // Select the first food item to test with
     const testItem = foodList.data[0];
     console.log(`Selected test item: ${testItem.name} (${testItem._id})`);
     
-    // Create test payload
     const payload = {
       id: testItem._id,
       name: testItem.name + " (Edited)",
@@ -31,7 +26,6 @@ const testEditEndpoint = async () => {
     
     console.log("Test payload:", payload);
     
-    // Send the request
     console.log("Sending POST request to /api/food/edit...");
     const editResponse = await fetch('http://localhost:4000/api/food/edit', {
       method: 'POST',

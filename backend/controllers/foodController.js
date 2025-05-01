@@ -2,7 +2,6 @@ import foodModel from "../models/foodModel.js";
 import categoryModel from "../models/categoryModel.js";
 import fs from 'fs';
 
-//add food item
 const addFood = async (req,res) => {
       let image_filename = `${req.file.filename}`;
       const food = new foodModel({
@@ -16,7 +15,6 @@ const addFood = async (req,res) => {
       try {
         await food.save();
         
-        // Check if category exists, if not add it
         const categoryExists = await categoryModel.findOne({ name: req.body.category });
         if (!categoryExists) {
           const newCategory = new categoryModel({ name: req.body.category });
@@ -30,7 +28,6 @@ const addFood = async (req,res) => {
       }
 }
 
-//all food list
 const listFood = async (req,res) => {
     try {
         const foods = await foodModel.find({});
@@ -41,7 +38,6 @@ const listFood = async (req,res) => {
     }
 }
 
-//remove food item
 const removeFood = async (req,res) => {
     try {
         const food = await foodModel.findById(req.body.id);
@@ -56,14 +52,12 @@ const removeFood = async (req,res) => {
     }
 }
 
-// Edit food item
 const editFood = async (req, res) => {
     console.log("Edit food endpoint called with data:", req.body);
     
     try {
         const { id, name, description, price, category } = req.body;
         
-        // Validate required fields
         if (!id || !name || !description || price === undefined || !category) {
             return res.json({
                 success: false,
@@ -72,7 +66,6 @@ const editFood = async (req, res) => {
             });
         }
 
-        // Find the food item by ID
         const food = await foodModel.findById(id);
         if (!food) {
             return res.json({
@@ -83,17 +76,14 @@ const editFood = async (req, res) => {
 
         console.log("Found food item to update:", food);
 
-        // Update the food item
         food.name = name;
         food.description = description;
         food.price = Number(price);
         food.category = category;
 
-        // Save the updated food item
         const updatedFood = await food.save();
         console.log("Food item updated successfully:", updatedFood);
 
-        // Check if category exists, if not add it
         const categoryExists = await categoryModel.findOne({ name: category });
         if (!categoryExists) {
             console.log("Adding new category:", category);
@@ -116,12 +106,10 @@ const editFood = async (req, res) => {
     }
 };
 
-// Get all categories
 const getCategories = async (req, res) => {
     try {
         const categories = await categoryModel.find({}).distinct('name');
         
-        // If no categories exist yet in the database, return default categories
         if (!categories || categories.length === 0) {
             const defaultCategories = [
                 "Salad", "Rolls", "Deserts", "Sandwich", 
@@ -137,22 +125,18 @@ const getCategories = async (req, res) => {
     }
 };
 
-// Add a new category
 const addCategory = async (req, res) => {
     try {
         const { name } = req.body;
         
-        // Check if category already exists
         const existingCategory = await categoryModel.findOne({ name });
         if (existingCategory) {
             return res.json({success: false, message: "Category already exists"});
         }
         
-        // Create new category
         const newCategory = new categoryModel({ name });
         await newCategory.save();
         
-        // Return all categories including the new one
         const allCategories = await categoryModel.find({}).distinct('name');
         
         res.json({
@@ -166,7 +150,6 @@ const addCategory = async (req, res) => {
     }
 };
 
-// Remove a category
 const removeCategory = async (req, res) => {
     try {
         console.log("removeCategory function called with body:", req.body);
@@ -182,7 +165,6 @@ const removeCategory = async (req, res) => {
         const { name } = req.body;
         console.log(`Attempting to delete category: "${name}"`);
         
-        // Check if category exists in database
         const existingCategory = await categoryModel.findOne({ name });
         console.log("Category found:", existingCategory);
         
@@ -193,7 +175,6 @@ const removeCategory = async (req, res) => {
             });
         }
         
-        // Check if there are food items using this category
         const foodItemsWithCategory = await foodModel.countDocuments({ category: name });
         if (foodItemsWithCategory > 0) {
             return res.json({
@@ -202,7 +183,6 @@ const removeCategory = async (req, res) => {
             });
         }
         
-        // Delete the category
         const result = await categoryModel.deleteOne({ name });
         console.log("Delete result:", result);
         
@@ -213,7 +193,6 @@ const removeCategory = async (req, res) => {
             });
         }
         
-        // Return remaining categories
         const allCategories = await categoryModel.find({}).distinct('name');
         
         return res.json({
