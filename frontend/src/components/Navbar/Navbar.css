@@ -72,6 +72,8 @@
     display: none;
     right: 0;
     z-index: 1;
+    background-color: white; /* Ensure white background in both themes */
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-profile:hover .nav-profile-dropdown{
@@ -92,14 +94,21 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    color: #000; /* Force black text color for both themes */
 }
 
 .nav-profile-dropdown img{
     width: 20px;
 }
 
+.nav-profile-dropdown li p {
+    color: #000 !important; /* Use !important to override any inherited colors */
+    font-weight: 500; /* Make the text slightly bolder for better visibility */
+}
+
 .nav-profile-dropdown li:hover{
     color: tomato;
+    background-color: #f5f5f5; /* Light gray background on hover in light mode */
 }
 
 .navbar-search {
@@ -436,4 +445,21 @@
 
 .dark-mode .search-suggestion-item:hover {
   background-color: var(--hover-bg-color);
+}
+
+.dark-mode .nav-profile-dropdown {
+  background-color: white; /* Keep the dropdown background white even in dark mode */
+  border: 1px solid #ddd; /* Add subtle border in dark mode for better separation */
+}
+
+.dark-mode .nav-profile-dropdown li p {
+  color: #000 !important; /* Ensure black text in dark mode */
+}
+
+.dark-mode .nav-profile-dropdown li:hover {
+  background-color: #f0f0f0; /* Slightly different hover color for dark mode */
+}
+
+.dark-mode .nav-profile-dropdown hr {
+  border-color: #ddd; /* Lighter hr color for better visibility */
 }
