@@ -24,15 +24,25 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    // Debug log
+    console.log("Attempting login with:", email);
+    console.log("Environment variables loaded:", !!import.meta.env.VITE_ADMIN_EMAIL);
+
     // Simulate network delay
     setTimeout(() => {
-      const isSuccessful = login(email, password);
+      // For production environment, use hardcoded credentials as fallback
+      const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || "mealsbymanoj@gmail.com";
+      const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || "Manoj@123";
       
-      if (isSuccessful) {
+      const isCorrectCredentials = (email === adminEmail && password === adminPassword);
+      
+      if (isCorrectCredentials) {
+        login(email, password);
         toast.success('Login successful! Welcome to admin panel.');
         navigate('/add');
       } else {
         toast.error('Invalid email or password. Please try again.');
+        console.error("Login failed. Entered email:", email, "Expected:", adminEmail);
       }
       
       setIsLoading(false);

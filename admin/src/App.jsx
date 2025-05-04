@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/sidebar/Sidebar'
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -53,6 +53,14 @@ const AppContent = () => {
 };
 
 const App = () => {
+  // Debug log to check environment variables in production
+  useEffect(() => {
+    console.log("Environment check:", {
+      hasEnvVars: !!import.meta.env.VITE_ADMIN_EMAIL,
+      mode: import.meta.env.MODE || 'unknown'
+    });
+  }, []);
+
   return (
     <AuthProvider>
       <DarkModeProvider>

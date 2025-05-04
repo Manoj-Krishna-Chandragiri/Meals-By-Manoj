@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
 
@@ -12,10 +13,13 @@ export const AuthProvider = ({ children }) => {
     return storedAuth ? JSON.parse(storedAuth) : false;
   });
 
-  // Login function using environment variables for credentials
+  // Login function with hardcoded fallback credentials 
   const login = (email, password) => {
-    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
-    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+    // Try to get credentials from environment variables
+    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || "mealsbymanoj@gmail.com";
+    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || "Manoj@123";
+    
+    console.log("Login attempt with:", { email, adminEmail });
     
     if (email === adminEmail && password === adminPassword) {
       setIsAuthenticated(true);
@@ -44,7 +48,7 @@ export const AuthProvider = ({ children }) => {
       
       return () => clearTimeout(logoutTimer);
     }
-  }, [isAuthenticated, logout]);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
