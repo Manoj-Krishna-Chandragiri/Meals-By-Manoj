@@ -18,6 +18,21 @@
   gap: 15px;
 }
 
+.logout-btn {
+  background-color: #f44336 !important; /* Added !important to ensure this color is applied */
+  color: white !important;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f !important; /* Added !important to ensure this color is applied on hover */
+}
+
 .dark-mode .navbar {
   background-color: var(--bg-color);
 }
@@ -28,4 +43,12 @@
 
 .dark-mode .profile {
   border-color: var(--border-color);
+}
+
+.dark-mode .logout-btn {
+  background-color: #f44336 !important; /* Added !important to ensure this color is applied in dark mode */
+}
+
+.dark-mode .logout-btn:hover {
+  background-color: #c62828 !important; /* Added !important to ensure this color is applied on hover in dark mode */
 }

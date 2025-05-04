@@ -1,8 +1,32 @@
-# React + Vite
+# Meals By Manoj - Admin Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Admin panel for managing the Meals By Manoj restaurant website.
 
-Currently, two official plugins are available:
+## Environment Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+For local development, create a `.env` file in the root directory with the following variables:
+
+```
+VITE_ADMIN_EMAIL=mealsbymanoj@gmail.com
+VITE_ADMIN_PASSWORD=your_secure_password
+```
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+## Security Note
+
+The admin credentials are stored in environment variables for security. Never commit the `.env` file to version control. For production deployment, set these variables in your hosting platform's environment configuration.

@@ -22,6 +22,7 @@ const List = ({url}) => {
   });
 
   const [categories, setCategories] = useState(['All']);
+  const [visibleItems, setVisibleItems] = useState(20); // Initially show 20 items
 
   const fetchCategories = useCallback(async () => {
     try {
@@ -189,6 +190,16 @@ const List = ({url}) => {
     return sortOrder === 'asc' ? ' ▲' : ' ▼';
   };
 
+  // Add this function to load more items
+  const loadMoreItems = () => {
+    setVisibleItems(prev => prev + 10); // Load 10 more items
+  };
+
+  // Get paginated list items
+  const paginatedItems = useMemo(() => {
+    return filteredAndSortedList.slice(0, visibleItems);
+  }, [filteredAndSortedList, visibleItems]);
+
   return (
     <div className='list add flex-col'>
       <h2>All Foods List</h2>
@@ -218,7 +229,7 @@ const List = ({url}) => {
       </div>
       
       <div className="list-summary">
-        <p>Showing {filteredAndSortedList.length} of {list.length} items</p>
+        <p>Showing {paginatedItems.length} of {filteredAndSortedList.length} items (total: {list.length})</p>
       </div>
       
       <div className="list-table">
@@ -236,7 +247,7 @@ const List = ({url}) => {
           <b>Actions</b>
         </div>
         {filteredAndSortedList.length > 0 ? (
-          filteredAndSortedList.map((item, index) => (
+          paginatedItems.map((item, index) => (
             <div key={item._id || index} className='list-table-format'>
               <img src={item.image && item.image.startsWith('data:') ? item.image : `${url}/images/${item.image}`} alt={item.name} />
               <div className="item-name-description">
@@ -269,6 +280,17 @@ const List = ({url}) => {
           </div>
         )}
       </div>
+
+      {visibleItems < filteredAndSortedList.length && (
+        <div className="load-more-container">
+          <button onClick={loadMoreItems} className="load-more-btn">
+            Load More Items
+          </button>
+          <p className="items-remaining">
+            {filteredAndSortedList.length - visibleItems} items remaining
+          </p>
+        </div>
+      )}
 
       {isEditModalOpen && editingItem && (
         <div className="edit-modal-overlay">

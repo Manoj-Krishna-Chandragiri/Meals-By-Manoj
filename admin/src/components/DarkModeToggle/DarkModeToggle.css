@@ -38,7 +38,6 @@
   transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
-/* Move the toggle when checkbox is checked */
 .dark-mode-toggle-checkbox:checked + .dark-mode-toggle-label {
   background-color: #36393f;
 }
@@ -48,7 +47,6 @@
   background-color: #484b51;
 }
 
-/* Sun and moon icons */
 .dark-mode-toggle-switch {
   position: relative;
   width: 100%;
@@ -80,7 +78,6 @@
   opacity: 1;
 }
 
-/* Focus styles for accessibility */
 .dark-mode-toggle-checkbox:focus + .dark-mode-toggle-label {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }

@@ -40,6 +40,32 @@
     transition: filter 0.3s ease;
 }
 
+.sidebar-option.analytics-icon img {
+  filter: none !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-option.food-list-icon img {
+  filter: none !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+}
+
+.dark-mode .sidebar-option.analytics-icon img {
+  filter: brightness(0) invert(1) !important;
+}
+
+.dark-mode .sidebar-option.food-list-icon img {
+  filter: brightness(0) invert(1) !important;
+}
+
 .dark-mode .sidebar .sidebar-options .sidebar-option img {
     filter: brightness(10) invert(1) !important;
 }
@@ -54,4 +80,48 @@
 
 html body .dark-mode .sidebar .sidebar-option img {
     filter: brightness(10) invert(1) !important;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 100;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar-expanded {
+    width: 200px;
+  }
+  
+  .sidebar-options {
+    padding-left: 15px;
+  }
+  
+  .sidebar-option p {
+    display: none;
+  }
+  
+  .sidebar-expanded .sidebar-option p {
+    display: block;
+  }
+  
+  .toggle-sidebar {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: -15px;
+    background: tomato;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
 }

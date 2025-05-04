@@ -13,6 +13,19 @@
   --button-hover: #357ab8;
   --sidebar-bg: #ffffff;
   --sidebar-hover: #f0f0f0;
+
+  /* Login page specific variables */
+  --login-bg: #f8f9fa;
+  --login-card-bg: #ffffff;
+  --login-header-bg: #ffffff;
+  --login-input-bg: #f9f9f9;
+  --login-footer-bg: #f9f9f9;
+  --login-text-primary: #333333;
+  --login-text-secondary: #777777;
+  --login-btn-bg: tomato;
+  --login-btn-hover: #e74c3c;
+  --login-input-border: #e1e1e1;
+  --login-shadow: rgba(0, 0, 0, 0.08);
 }
 
 .dark-mode {
@@ -28,6 +41,19 @@
   --button-hover: #65a3e8;
   --sidebar-bg: #1a1a1a;
   --sidebar-hover: #333333;
+
+  /* Login page specific variables */
+  --login-bg: #0f172a;
+  --login-card-bg: #1e293b;
+  --login-header-bg: #1e293b;
+  --login-input-bg: #334155;
+  --login-footer-bg: #1a2234;
+  --login-text-primary: #f1f5f9;
+  --login-text-secondary: #94a3b8;
+  --login-btn-bg: tomato;
+  --login-btn-hover: #e74c3c;
+  --login-input-border: #475569;
+  --login-shadow: rgba(0, 0, 0, 0.3);
 }
 
 *{
@@ -74,6 +100,10 @@ hr{
   width: auto;
   height: 40px;
   object-fit: contain;
+  max-width: 150px; /* Add max-width */
+  background-color: transparent; /* Ensure transparent background */
+  padding: 2px; /* Add slight padding */
+  border-radius: 4px; /* Add slight rounding */
 }
 
 .dark-mode button:not(.edit-btn):not(.delete-btn):not(.refresh-btn):not(.dark-mode-toggle-label) {

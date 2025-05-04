@@ -383,3 +383,49 @@
 .dark-mode .cancel-btn:hover {
   background-color: #555555;
 }
+
+.load-more-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+.load-more-btn {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.items-remaining {
+  font-size: 14px;
+  color: #888;
+}
+
+/* Dark mode styles */
+.dark-mode .load-more-btn {
+  background-color: #4a90e2 !important;
+  color: white !important;
+}
+
+.dark-mode .load-more-btn:hover {
+  background-color: #357ab8 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .items-remaining {
+  color: #aaa;
+}
