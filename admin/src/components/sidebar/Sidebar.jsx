@@ -17,11 +17,11 @@ const Sidebar = () => {
     
     if (location.pathname === '/analytics') {
       if (linkIcon) {
-        linkIcon.href = "/icons/data-analysis-icon-16.png";
+        linkIcon.href = "/src/assets/logo.png";
       }
     } else {
       if (linkIcon) {
-        linkIcon.href = "/favicon.ico";
+        linkIcon.href = "/src/assets/logo.png";
       }
     }
   }, [location]);

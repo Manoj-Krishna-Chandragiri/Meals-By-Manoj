@@ -5,6 +5,7 @@ import './Analytics.css';
 import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useDarkMode } from '../../context/DarkModeContext';
 
 // Register the required Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -17,6 +18,7 @@ const Analytics = ({ url }) => {
   const [error, setError] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [categoryData, setCategoryData] = useState([]);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     document.title = "Analytics Dashboard | Meals By Manoj";
@@ -24,17 +26,18 @@ const Analytics = ({ url }) => {
     // Update favicon for analytics page
     const linkIcon = document.querySelector('link[sizes="16x16"]');
     if (linkIcon) {
-      linkIcon.href = "https://img.icons8.com/ios/50/financial-growth-analysis.png";
+      linkIcon.href = "/src/assets/logo.png";
     }
     
     // Clean up function to restore original favicon when leaving page
     return () => {
       if (linkIcon) {
-        linkIcon.href = "/favicon.ico";
+        linkIcon.href = "/src/assets/logo.png";
       }
     };
   }, []);
 
+  // Fetch data only once when component mounts or when refresh is triggered
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -78,62 +81,8 @@ const Analytics = ({ url }) => {
       }
     };
     
+    // Fetch data
     fetchData();
-  }, [url, refreshKey]);
-
-  // Add polling mechanism to regularly update the data
-  useEffect(() => {
-    // Initial data fetch
-    const fetchData = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        // Add timestamp to avoid caching
-        const timestamp = new Date().getTime();
-        const ordersResponse = await axios.get(`${url}/api/order/list?t=${timestamp}`);
-        const foodResponse = await axios.get(`${url}/api/food/list?t=${timestamp}`);
-        const categoriesResponse = await axios.get(`${url}/api/food/categories?t=${timestamp}`);
-        
-        if (ordersResponse.data.success) {
-          // Make sure all dates are parsed correctly
-          const ordersWithFormattedDates = (ordersResponse.data.data || []).map(order => ({
-            ...order,
-            createdAt: order.createdAt ? new Date(order.createdAt).toISOString() : new Date().toISOString()
-          }));
-          setOrderData(ordersWithFormattedDates);
-        } else {
-          throw new Error("Failed to fetch order data");
-        }
-        
-        if (foodResponse.data.success) {
-          setFoodData(foodResponse.data.data || []);
-        } else {
-          throw new Error("Failed to fetch food data");
-        }
-        
-        if (categoriesResponse.data.success) {
-          setCategoryData(categoriesResponse.data.categories || []);
-        }
-      } catch (error) {
-        console.error("Error fetching analytics data:", error);
-        setError(error.message || "Failed to load analytics data");
-        toast.error("Failed to load analytics data");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    // Fetch data initially
-    fetchData();
-    
-    // Set up auto-refresh every 30 seconds
-    const intervalId = setInterval(() => {
-      console.log("Auto-refreshing analytics data...");
-      fetchData();
-    }, 30000); // 30 seconds
-    
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
   }, [url, refreshKey]);
 
   const handleRefresh = () => {
@@ -491,7 +440,8 @@ const Analytics = ({ url }) => {
                     legend: {
                       position: 'right',
                       labels: {
-                        color: '#333',
+                        // Use the dark mode context to determine label color
+                        color: darkMode ? '#ffffff' : '#333',
                         font: {
                           size: 12
                         },
