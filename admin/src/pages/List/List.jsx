@@ -20,6 +20,7 @@ const List = ({url}) => {
     price: '',
     category: ''
   });
+  const [editImage, setEditImage] = useState(null);
 
   const [categories, setCategories] = useState(['All']);
 
@@ -71,7 +72,7 @@ const List = ({url}) => {
     }
   }
 
-  // Update the openEditModal function to fetch fresh categories
+  // Update the openEditModal function to also reset editImage
   const openEditModal = async (item) => {
     // Fetch the latest categories before opening the modal
     await fetchCategories();
@@ -83,6 +84,7 @@ const List = ({url}) => {
       price: item.price,
       category: item.category
     });
+    setEditImage(null);
     setIsEditModalOpen(true);
   };
 
@@ -101,43 +103,61 @@ const List = ({url}) => {
     });
   };
 
-  // Submit edited food item - simplified for reliability
+  // Submit edited food item - now supports image upload
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create payload with numeric price
-    const payload = {
-      id: editingItem._id,
-      name: editFormData.name,
-      description: editFormData.description,
-      price: Number(editFormData.price),
-      category: editFormData.category
-    };
-    
+
+    // Use FormData if image is being updated
+    let formData;
+    let isMultipart = false;
+    if (editImage) {
+      formData = new FormData();
+      formData.append("id", editingItem._id);
+      formData.append("name", editFormData.name);
+      formData.append("description", editFormData.description);
+      formData.append("price", Number(editFormData.price));
+      formData.append("category", editFormData.category);
+      formData.append("image", editImage);
+      isMultipart = true;
+    }
+
     // Show loading toast
     const loadingToast = toast.loading("Updating food item...");
-    
+
     try {
-      console.log("Sending update request with payload:", payload);
-      
-      const response = await fetch(`${url}/api/food/edit`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
-      
-      // Dismiss loading toast
+      let response;
+      if (isMultipart) {
+        response = await fetch(`${url}/api/food/edit`, {
+          method: 'POST',
+          body: formData
+        });
+      } else {
+        // Create payload with numeric price
+        const payload = {
+          id: editingItem._id,
+          name: editFormData.name,
+          description: editFormData.description,
+          price: Number(editFormData.price),
+          category: editFormData.category
+        };
+        response = await fetch(`${url}/api/food/edit`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
       toast.dismiss(loadingToast);
-      
+
       if (response.ok) {
         const data = await response.json();
-        
+
         if (data.success) {
           toast.success("Food item updated successfully");
           closeEditModal();
-          await fetchList(); 
+          await fetchList();
           await fetchCategories();
         } else {
           toast.error(data.message || "Update failed");
@@ -295,7 +315,7 @@ const List = ({url}) => {
               <h3>Edit Food Item</h3>
               <button className="close-modal" onClick={closeEditModal}>×</button>
             </div>
-            <form onSubmit={handleEditSubmit} className="edit-form">
+            <form onSubmit={handleEditSubmit} className="edit-form" encType={editImage ? "multipart/form-data" : undefined}>
               <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input
@@ -345,6 +365,29 @@ const List = ({url}) => {
                   onChange={handleEditInputChange}
                   required
                 />
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-image">Image:</label>
+                <input
+                  type="file"
+                  id="edit-image"
+                  name="image"
+                  accept="image/*"
+                  onChange={e => setEditImage(e.target.files[0])}
+                />
+                <div className="edit-image-preview">
+                  <img
+                    src={
+                      editImage
+                        ? URL.createObjectURL(editImage)
+                        : (editingItem.image && editingItem.image.startsWith('data:'))
+                          ? editingItem.image
+                          : `${url}/images/${editingItem.image}`
+                    }
+                    alt="Preview"
+                    style={{ maxWidth: 100, maxHeight: 100, marginTop: 8 }}
+                  />
+                </div>
               </div>
               <div className="edit-modal-actions">
                 <button type="button" onClick={closeEditModal} className="cancel-btn">Cancel</button>

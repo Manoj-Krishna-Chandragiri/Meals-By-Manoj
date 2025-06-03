@@ -9,6 +9,9 @@ import orderRouter from "./routes/orderRoute.js";
 import mongoose from "mongoose";
 import foodModel from "./models/foodModel.js";
 import categoryModel from "./models/categoryModel.js";
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 
 // app config
 const app = express();
@@ -44,15 +47,30 @@ app.use((req, res, next) => {
 // Connect to MongoDB
 connectDB();
 
+// Multer setup for edit endpoint
+const storage = multer.diskStorage({
+    destination: "uploads",
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}${file.originalname}`);
+    }
+});
+const upload = multer({ storage: storage });
+
 // Define the food edit endpoint directly in the main app
 // This ensures it's available and working properly
-app.post("/api/food/edit", async (req, res) => {
-    console.log("Direct food edit endpoint called with data:", req.body);
-    
+app.post("/api/food/edit", upload.single("image"), async (req, res) => {
+    // If multipart, fields are in req.body, file in req.file
     try {
-        const { id, name, description, price, category } = req.body;
-        
-        // Validate required fields
+        let { id, name, description, price, category } = req.body;
+        // If not multipart, fallback to req.body as JSON
+        if (!id && req.body && typeof req.body === "object") {
+            id = req.body.id;
+            name = req.body.name;
+            description = req.body.description;
+            price = req.body.price;
+            category = req.body.category;
+        }
+
         if (!id || !name || !description || price === undefined || !category) {
             return res.status(400).json({
                 success: false,
@@ -61,10 +79,7 @@ app.post("/api/food/edit", async (req, res) => {
             });
         }
 
-        // Ensure we're using a properly initialized foodModel
         const foodModel = mongoose.models.food || mongoose.model('food');
-        
-        // Find the food item by ID
         const food = await foodModel.findById(id);
         if (!food) {
             return res.status(404).json({
@@ -73,27 +88,34 @@ app.post("/api/food/edit", async (req, res) => {
             });
         }
 
-        console.log("Found food item:", food);
-        
-        // Update the food item
+        // Update fields
         food.name = name;
         food.description = description;
         food.price = Number(price);
         food.category = category;
-        
-        // Save the updated food item
-        const updatedFood = await food.save();
-        console.log("Updated food item:", updatedFood);
-        
+
+        // Handle image update
+        if (req.file && req.file.filename) {
+            // Remove old image if exists and is not a data URI
+            if (food.image && !food.image.startsWith("data:")) {
+                const oldImagePath = path.join("uploads", food.image);
+                if (fs.existsSync(oldImagePath)) {
+                    fs.unlinkSync(oldImagePath);
+                }
+            }
+            food.image = req.file.filename;
+        }
+
+        const updatedFood = await food.save(); // This only updates, never creates new
+
         // Check if category exists, if not add it
         const categoryModel = mongoose.models.category || mongoose.model('category');
         const categoryExists = await categoryModel.findOne({ name: category });
         if (!categoryExists) {
-            console.log("Adding new category:", category);
             const newCategory = new categoryModel({ name: category });
             await newCategory.save();
         }
-        
+
         res.json({
             success: true,
             message: "Food item updated successfully",

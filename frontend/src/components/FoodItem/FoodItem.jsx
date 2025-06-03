@@ -30,7 +30,7 @@ const FoodItem = ({id, name, price, description, image}) => {
         if (image && (image.startsWith('data:image') || image.startsWith('data:image/svg+xml'))) {
             return image;
         }
-        // Otherwise, use the backend URL
+        // Always use backend URL for all other images
         return `${url}/images/${image}`;
     };
 

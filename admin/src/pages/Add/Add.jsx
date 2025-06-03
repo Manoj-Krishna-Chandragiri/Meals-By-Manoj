@@ -22,7 +22,7 @@ const Add = ({url}) => {
 
   // Fetch existing categories when component mounts
   useEffect(() => {
-    fetchCategories();
+    fetchCategories(  );
   }, [url]);
   
   // Extract the fetchCategories function to be able to call it after adding new categories

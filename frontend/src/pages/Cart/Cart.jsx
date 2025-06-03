@@ -9,6 +9,15 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
+  // Helper to get correct image URL
+  const getImageUrl = (image) => {
+    if (image && (image.startsWith('data:image') || image.startsWith('data:image/svg+xml'))) {
+      return image;
+    }
+    // Always use backend URL for all other images
+    return `${url}/images/${image}`;
+  };
+
   return (
     <div className='cart'>
       <div className="cart-items">
@@ -27,7 +36,7 @@ const Cart = () => {
             return (
               <div key={item._id}>
                 <div className='cart-items-title cart-items-item'>
-                  <img src={url+"/images/"+item.image} alt="" />
+                  <img src={getImageUrl(item.image)} alt="" />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
                   <p>{cartItems[item._id]}</p>
