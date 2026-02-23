@@ -14,7 +14,7 @@ const App = () => {
   const [showLogin,setShowLogin] = useState(false)
 
   return (
-    <DarkModeProvider>``
+    <DarkModeProvider>
       {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : <></>}
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />

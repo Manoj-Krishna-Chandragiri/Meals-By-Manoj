@@ -26,7 +26,6 @@
   padding: 2px;
 }
 
-/* Make toggle slider black in light mode */
 .dark-mode-toggle-label::after {
   content: '';
   position: absolute;
@@ -35,18 +34,18 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #333; /* Black slider in light mode */
+  background-color: #333;
   transition: transform 0.3s, background-color 0.3s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode-toggle-input:checked + .dark-mode-toggle-label {
-  background-color: #555; /* Darker background when toggled */
+  background-color: #555;
 }
 
 .dark-mode-toggle-input:checked + .dark-mode-toggle-label::after {
   transform: translateX(24px);
-  background-color: white; /* White slider in dark mode */
+  background-color: white;
 }
 
 .dark-mode-toggle-icon {
@@ -62,11 +61,10 @@
   z-index: 1;
 }
 
-/* Color for icons based on theme */
 .sun-icon, .moon-icon {
   width: 16px;
   height: 16px;
-  color: #333; /* Dark color in light mode */
+  color: #333;
   opacity: 0.6;
   transition: color 0.3s, opacity 0.3s;
 }
@@ -81,17 +79,15 @@
   opacity: 0.6;
 }
 
-/* Dark mode specific styles */
 .dark-mode .dark-mode-toggle-input:checked + .dark-mode-toggle-label {
-  background-color: #ff4e4e; /* Primary color in dark mode */
+  background-color: #ff4e4e;
 }
 
 .dark-mode .sun-icon,
 .dark-mode .moon-icon {
-  color: white; /* White icons in dark mode */
+  color: white;
 }
 
-/* Adjust for small screens */
 @media (max-width: 768px) {
   .dark-mode-toggle-label {
     width: 44px;

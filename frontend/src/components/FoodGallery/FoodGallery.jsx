@@ -1,5 +1,4 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import './FoodGallery.css';
 import { StoreContext } from '../../context/StoreContext';
 import { assets } from '../../assets/assets';
@@ -35,13 +34,10 @@ const FoodGallery = ({ foods }) => {
     return null;
   }
 
-  // Handle potentially missing images and SVG data URIs
   const getImageUrl = (image) => {
-    // If image is a data URI, use it directly
     if (image && (image.startsWith('data:image') || image.startsWith('data:image/svg+xml'))) {
       return image;
     }
-    // Always use backend URL for all other images
     return `${url}/images/${image}`;
   };
 
@@ -92,7 +88,4 @@ const FoodGallery = ({ foods }) => {
   );
 };
 
-FoodGallery.propTypes = {
-  foods: PropTypes.arrayOf(PropTypes.object)
-};
 export default FoodGallery;

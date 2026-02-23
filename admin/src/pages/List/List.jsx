@@ -20,16 +20,14 @@ const List = ({url}) => {
     price: '',
     category: ''
   });
-  const [editImage, setEditImage] = useState(null);
 
   const [categories, setCategories] = useState(['All']);
+  const [visibleItems, setVisibleItems] = useState(20); // Initially show 20 items
 
-  // Add a new function to fetch categories from the API
   const fetchCategories = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/api/food/categories`);
       if (response.data.success) {
-        // Add 'All' category for filtering but preserve the original categories list
         setCategories(['All', ...response.data.categories]);
       }
     } catch (error) {
@@ -37,7 +35,6 @@ const List = ({url}) => {
     }
   }, [url]);
 
-  // Get unique categories from food items
   const allCategories = useMemo(() => {
     const cats = ['All', ...new Set(list.map(item => item.category))];
     return cats;
@@ -72,9 +69,7 @@ const List = ({url}) => {
     }
   }
 
-  // Update the openEditModal function to also reset editImage
   const openEditModal = async (item) => {
-    // Fetch the latest categories before opening the modal
     await fetchCategories();
 
     setEditingItem(item);
@@ -84,17 +79,14 @@ const List = ({url}) => {
       price: item.price,
       category: item.category
     });
-    setEditImage(null);
     setIsEditModalOpen(true);
   };
 
-  // Close edit modal
   const closeEditModal = () => {
     setIsEditModalOpen(false);
     setEditingItem(null);
   };
 
-  // Handle edit form input changes
   const handleEditInputChange = (e) => {
     const { name, value } = e.target;
     setEditFormData({
@@ -103,61 +95,39 @@ const List = ({url}) => {
     });
   };
 
-  // Submit edited food item - now supports image upload
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-
-    // Use FormData if image is being updated
-    let formData;
-    let isMultipart = false;
-    if (editImage) {
-      formData = new FormData();
-      formData.append("id", editingItem._id);
-      formData.append("name", editFormData.name);
-      formData.append("description", editFormData.description);
-      formData.append("price", Number(editFormData.price));
-      formData.append("category", editFormData.category);
-      formData.append("image", editImage);
-      isMultipart = true;
-    }
-
-    // Show loading toast
+    
+    const payload = {
+      id: editingItem._id,
+      name: editFormData.name,
+      description: editFormData.description,
+      price: Number(editFormData.price),
+      category: editFormData.category
+    };
+    
     const loadingToast = toast.loading("Updating food item...");
-
+    
     try {
-      let response;
-      if (isMultipart) {
-        response = await fetch(`${url}/api/food/edit`, {
-          method: 'POST',
-          body: formData
-        });
-      } else {
-        // Create payload with numeric price
-        const payload = {
-          id: editingItem._id,
-          name: editFormData.name,
-          description: editFormData.description,
-          price: Number(editFormData.price),
-          category: editFormData.category
-        };
-        response = await fetch(`${url}/api/food/edit`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload)
-        });
-      }
-
+      console.log("Sending update request with payload:", payload);
+      
+      const response = await fetch(`${url}/api/food/edit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+      
       toast.dismiss(loadingToast);
-
+      
       if (response.ok) {
         const data = await response.json();
-
+        
         if (data.success) {
           toast.success("Food item updated successfully");
           closeEditModal();
-          await fetchList();
+          await fetchList(); 
           await fetchCategories();
         } else {
           toast.error(data.message || "Update failed");
@@ -175,12 +145,10 @@ const List = ({url}) => {
 
   useEffect(() => {
     fetchList();
-    fetchCategories(); // Fetch categories on component load
+    fetchCategories();
   }, [fetchList, fetchCategories]);
   
-  // Filter and sort food items
   const filteredAndSortedList = useMemo(() => {
-    // First filter by search query and category
     const filtered = list.filter(item => {
       const matchesSearch = searchQuery === '' || 
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -191,12 +159,10 @@ const List = ({url}) => {
       return matchesSearch && matchesCategory;
     });
     
-    // Then sort by selected column and order
     return filtered.sort((a, b) => {
       let valueA = a[sortBy];
       let valueB = b[sortBy];
       
-      // For string values
       if (typeof valueA === 'string') {
         valueA = valueA.toLowerCase();
         valueB = valueB.toLowerCase();
@@ -210,7 +176,6 @@ const List = ({url}) => {
     });
   }, [list, searchQuery, selectedCategory, sortBy, sortOrder]);
   
-  // Toggle sort order and column
   const handleSort = (column) => {
     if (sortBy === column) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -220,11 +185,20 @@ const List = ({url}) => {
     }
   };
   
-  // Get sort indicator
   const getSortIndicator = (column) => {
     if (sortBy !== column) return null;
     return sortOrder === 'asc' ? ' ▲' : ' ▼';
   };
+
+  // Add this function to load more items
+  const loadMoreItems = () => {
+    setVisibleItems(prev => prev + 10); // Load 10 more items
+  };
+
+  // Get paginated list items
+  const paginatedItems = useMemo(() => {
+    return filteredAndSortedList.slice(0, visibleItems);
+  }, [filteredAndSortedList, visibleItems]);
 
   return (
     <div className='list add flex-col'>
@@ -255,7 +229,7 @@ const List = ({url}) => {
       </div>
       
       <div className="list-summary">
-        <p>Showing {filteredAndSortedList.length} of {list.length} items</p>
+        <p>Showing {paginatedItems.length} of {filteredAndSortedList.length} items (total: {list.length})</p>
       </div>
       
       <div className="list-table">
@@ -273,7 +247,7 @@ const List = ({url}) => {
           <b>Actions</b>
         </div>
         {filteredAndSortedList.length > 0 ? (
-          filteredAndSortedList.map((item, index) => (
+          paginatedItems.map((item, index) => (
             <div key={item._id || index} className='list-table-format'>
               <img src={item.image && item.image.startsWith('data:') ? item.image : `${url}/images/${item.image}`} alt={item.name} />
               <div className="item-name-description">
@@ -307,7 +281,17 @@ const List = ({url}) => {
         )}
       </div>
 
-      {/* Edit Modal */}
+      {visibleItems < filteredAndSortedList.length && (
+        <div className="load-more-container">
+          <button onClick={loadMoreItems} className="load-more-btn">
+            Load More Items
+          </button>
+          <p className="items-remaining">
+            {filteredAndSortedList.length - visibleItems} items remaining
+          </p>
+        </div>
+      )}
+
       {isEditModalOpen && editingItem && (
         <div className="edit-modal-overlay">
           <div className="edit-modal">
@@ -315,7 +299,7 @@ const List = ({url}) => {
               <h3>Edit Food Item</h3>
               <button className="close-modal" onClick={closeEditModal}>×</button>
             </div>
-            <form onSubmit={handleEditSubmit} className="edit-form" encType={editImage ? "multipart/form-data" : undefined}>
+            <form onSubmit={handleEditSubmit} className="edit-form">
               <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input
@@ -347,7 +331,6 @@ const List = ({url}) => {
                   onChange={handleEditInputChange}
                   required
                 >
-                  {/* Use all categories except the 'All' filter option */}
                   {categories.filter(cat => cat !== 'All').map(category => (
                     <option key={category} value={category}>{category}</option>
                   ))}
@@ -365,29 +348,6 @@ const List = ({url}) => {
                   onChange={handleEditInputChange}
                   required
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="edit-image">Image:</label>
-                <input
-                  type="file"
-                  id="edit-image"
-                  name="image"
-                  accept="image/*"
-                  onChange={e => setEditImage(e.target.files[0])}
-                />
-                <div className="edit-image-preview">
-                  <img
-                    src={
-                      editImage
-                        ? URL.createObjectURL(editImage)
-                        : (editingItem.image && editingItem.image.startsWith('data:'))
-                          ? editingItem.image
-                          : `${url}/images/${editingItem.image}`
-                    }
-                    alt="Preview"
-                    style={{ maxWidth: 100, maxHeight: 100, marginTop: 8 }}
-                  />
-                </div>
               </div>
               <div className="edit-modal-actions">
                 <button type="button" onClick={closeEditModal} className="cancel-btn">Cancel</button>

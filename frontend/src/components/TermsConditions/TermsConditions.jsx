@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './TermsConditions.css';
 
 const TermsConditions = ({ onClose }) => {
@@ -23,11 +22,11 @@ const TermsConditions = ({ onClose }) => {
           <div className="features-guidance">
             <h4>Key Features:</h4>
             <ul>
-              <li><strong>Interactive Menu Exploration:</strong> Use the category tabs to filter food items and quickly find what you&apos;re looking for.</li>
+              <li><strong>Interactive Menu Exploration:</strong> Use the category tabs to filter food items and quickly find what you're looking for.</li>
               <li><strong>Smart Search:</strong> The search feature allows you to find food items by name or ingredients.</li>
               <li><strong>Dark Mode:</strong> Toggle between light and dark themes using the switch in the navigation bar.</li>
               <li><strong>Cart Management:</strong> Add items to your cart, adjust quantities, and view your order summary.</li>
-              <li><strong>Order Tracking:</strong> After placing an order, you can track its status in the &quot;Orders&quot; section.</li>
+              <li><strong>Order Tracking:</strong> After placing an order, you can track its status in the "Orders" section.</li>
             </ul>
             
             <h4>Tips for the Best Experience:</h4>
@@ -45,7 +44,7 @@ const TermsConditions = ({ onClose }) => {
           
           <h4>1. Acceptance of Terms</h4>
           <p>
-            By accessing or using Meals By Manoj (the &quot;Service&quot;), you agree to be bound by these Terms and Conditions. 
+            By accessing or using Meals By Manoj (the "Service"), you agree to be bound by these Terms and Conditions. 
             The Service is owned and operated by Manoj Krishna Chandragiri.
           </p>
           
@@ -88,7 +87,7 @@ const TermsConditions = ({ onClose }) => {
           <h4>8. Contact Information</h4>
           <p>
             For questions about this project, please contact:<br />
-            Email: contact@manojkrishna.tech<br />
+            Email: contact@manojkrishna.me<br />
             Phone: +91 852-382-3805
           </p>
           
@@ -103,9 +102,6 @@ const TermsConditions = ({ onClose }) => {
       </div>
     </div>
   );
-};
-TermsConditions.propTypes = {
-  onClose: PropTypes.func.isRequired,
 };
 
 export default TermsConditions;

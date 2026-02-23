@@ -1,19 +1,18 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const connectDB = async () => {
+export const connectDB = async () => {
   if (!process.env.MONGODB_URI) {
     console.error('MONGODB_URI is not set in environment variables');
     process.exit(1);
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('MongoDB connected successfully');
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 30000
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
-    // Exit so Render/PM2 restarts the service rather than running with no DB
     process.exit(1);
   }
 };
-
-module.exports = connectDB;

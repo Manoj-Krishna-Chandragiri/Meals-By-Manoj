@@ -1,17 +1,18 @@
 import React from 'react'
 import './Footer.css'
 import { assets } from '../../assets/assets'
+
 const Footer = () => {
     return (
         <div className='footer' id='footer'>
             <div className="footer-content">
                 <div className="footer-content-left">
-                    <img src={assets.logo} alt="" />
+                    <img src={assets.logo} alt="Meals By Manoj Logo" className="footer-logo" />
                     <p>Welcome to our food delivery service. We strive to bring you the best culinary experiences from local restaurants to your doorstep. Enjoy fast delivery, excellent customer service, and a wide variety of cuisine options.</p>
                     <div className="footer-social-icons">
-                        <img src={assets.facebook_icon} alt="" />
-                        <img src={assets.twitter_icon} alt="" />
-                        <img src={assets.linkedin_icon} alt="" />
+                        <img src={assets.facebook_icon} alt="Facebook" />
+                        <img src={assets.twitter_icon} alt="Twitter" />
+                        <img src={assets.linkedin_icon} alt="LinkedIn" />
                     </div>
                 </div>
                 <div className="footer-content-center">
@@ -27,7 +28,7 @@ const Footer = () => {
                     <h2>GET IN TOUCH</h2>
                     <ul>
                         <li>+91 852-382-3805</li>
-                        <li>contact@manojkrishna.tech</li>
+                        <li>contact@manojkrishna.me</li>
                     </ul>
                 </div>
             </div>

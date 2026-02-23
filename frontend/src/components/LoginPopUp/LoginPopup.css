@@ -1,4 +1,3 @@
-/* Login popup styling */
 .login-popup {
     width: 100%;
     height: 100%;
@@ -17,9 +16,9 @@
 .login-popup-container {
   background-color: white;
   width: 90%;
-  max-width: 400px; /* Reduce from 500px to 400px for a more compact popup */
+  max-width: 400px; 
   border-radius: 20px;
-  padding: 25px; /* Slightly reduce padding from 30px */
+  padding: 25px; 
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
   animation: slideUp 0.4s ease;
 }
@@ -146,7 +145,6 @@
     }
 }
 
-/* Dark mode styles */
 .dark-mode .login-popup {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(7px);
@@ -163,7 +161,7 @@
 }
 
 .dark-mode .login-popup-title img {
-    filter: brightness(10); /* Make close icon white */
+    filter: brightness(10); 
 }
 
 .dark-mode .login-popup-inputs input {
@@ -225,7 +223,6 @@
   color: #ff6347;
 }
 
-/* Make the popup more compact in mobile view */
 @media (max-width: 480px) {
   .login-popup-container {
     width: 92%; 

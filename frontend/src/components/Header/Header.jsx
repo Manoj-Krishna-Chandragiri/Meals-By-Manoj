@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './Header.css'
 
 const Header = () => {
-  // Define the text that should appear
   const firstLine = 'Order your';
   const secondLine = 'favourite food here';
   
@@ -11,29 +10,23 @@ const Header = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   const [ellipsisState, setEllipsisState] = useState(0);
 
-  // More reliable animation with exact string handling
   useEffect(() => {
     let timeoutFirstLine;
     let timeoutSecondLine;
     let ellipsisInterval;
     
-    // First line animation
     for (let i = 0; i <= firstLine.length; i++) {
       timeoutFirstLine = setTimeout(() => {
         setDisplayFirstLine(firstLine.substring(0, i));
         
-        // When first line is complete, start second line
         if (i === firstLine.length) {
-          // Start second line animation
           for (let j = 0; j <= secondLine.length; j++) {
             timeoutSecondLine = setTimeout(() => {
               setDisplaySecondLine(secondLine.substring(0, j));
               
-              // When second line is complete, start ellipsis
               if (j === secondLine.length) {
                 setAnimationComplete(true);
                 
-                // Start ellipsis animation
                 ellipsisInterval = setInterval(() => {
                   setEllipsisState(prev => (prev + 1) % 4);
                 }, 500);
@@ -44,7 +37,6 @@ const Header = () => {
       }, i * 100);
     }
     
-    // Cleanup
     return () => {
       clearTimeout(timeoutFirstLine);
       clearTimeout(timeoutSecondLine);
@@ -52,7 +44,6 @@ const Header = () => {
     };
   }, []);
 
-  // Get current ellipsis
   const getEllipsis = () => {
     return ['', '.', '..', '...'][ellipsisState];
   };

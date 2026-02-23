@@ -2,16 +2,12 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-// Create the context here instead of importing it
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     
     const [cartItems,setCartItems] = useState({});
-    // Use dynamic URL that works for both dev and production
-    const url = window.location.hostname === 'localhost' 
-        ? "http://localhost:4000" 
-        : "https://food-delivery-backend-a3p8.onrender.com";
+    const url = "https://meals-by-manoj-backend.onrender.com";
     const [token,setToken] = useState("");
     const [food_list,setFoodlist] = useState([]);
 
@@ -45,7 +41,7 @@ const StoreContextProvider = (props) => {
         }
         return totalAmount;
     }
-    // Improve the fetchFoodList function with better error handling
+    
     const fetchFoodList = async () => {
         try {
             const response = await axios.get(url+"/api/food/list");
@@ -54,7 +50,6 @@ const StoreContextProvider = (props) => {
             }
         } catch (error) {
             console.error("Error fetching food list:", error);
-            // You could add fallback data here if needed
         }
     }
 

@@ -89,7 +89,6 @@
     }
 }
 
-/* Dark mode styles for better visibility */
 .dark-mode .cart-total h2,
 .dark-mode .cart-total b,
 .dark-mode .cart-total p {
@@ -100,7 +99,6 @@
   color: #d1d1d1 !important;
 }
 
-/* Keep checkout button orange in dark mode */
 .dark-mode .cart-total button {
   background-color: var(--primary-color) !important;
   color: white !important;
@@ -115,7 +113,6 @@
   box-shadow: 0 6px 12px rgba(255, 71, 87, 0.3);
 }
 
-/* Promo code section styling */
 .dark-mode .cart-promocode p {
   color: #d1d1d1 !important;
 }

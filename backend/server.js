@@ -1,26 +1,21 @@
-require('dotenv').config();
-
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const connectDB = require('./config/db');
-const foodRouter = require('./routes/foodRoute');
-const userRouter = require('./routes/userRoute');
-const cartRouter = require('./routes/cartRoute');
-const orderRouter = require('./routes/orderRoute');
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import { connectDB } from './config/db.js';
+import foodRouter from './routes/foodRoute.js';
+import userRouter from './routes/userRoute.js';
+import cartRouter from './routes/cartRoute.js';
+import orderRouter from './routes/orderRoute.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
-// ── CORS ─────────────────────────────────────────────────
-// Build allowed-origins list from env so Render env vars control it
+// ── CORS ─────────────────────────────────────────────────────────────────────
 const allowedOrigins = [
-  'http://localhost:5173',   // frontend dev
-  'http://localhost:5174',   // admin dev
+  'http://localhost:5173',
+  'http://localhost:5174',
   'http://localhost:4000',
 ];
-
-// Add production origins from env vars (space- or comma-separated)
 if (process.env.FRONTEND_URL) {
   process.env.FRONTEND_URL.split(/[,\s]+/).forEach(o => allowedOrigins.push(o.trim()));
 }
@@ -30,7 +25,6 @@ if (process.env.ADMIN_URL) {
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (server-to-server, curl, Postman)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
     callback(new Error(`CORS: origin ${origin} not allowed`));
@@ -40,17 +34,22 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'token', 'Authorization']
 }));
 
-// ── Middleware ────────────────────────────────────────────
+// ── Middleware ────────────────────────────────────────────────────────────────
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Serve uploaded food images at /images/<filename>
-app.use('/images', express.static(path.join(__dirname, 'uploads')));
+// Request logger
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+  next();
+});
 
-// ── Database ──────────────────────────────────────────────
+// ── Database ──────────────────────────────────────────────────────────────────
 connectDB();
 
-// ── Routes ────────────────────────────────────────────────
+// ── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/food', foodRouter);
+app.use('/images', express.static('uploads'));
 app.use('/api/user', userRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
@@ -59,8 +58,14 @@ app.get('/', (req, res) => {
   res.json({ success: true, message: 'Food Delivery API is running' });
 });
 
-// ── Start ─────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// ── Global error handler ──────────────────────────────────────────────────────
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  res.status(500).json({ success: false, message: err.message || 'Server error' });
+});
+
+// ── Start ─────────────────────────────────────────────────────────────────────
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
   console.log(`Allowed CORS origins: ${allowedOrigins.join(', ')}`);
 });

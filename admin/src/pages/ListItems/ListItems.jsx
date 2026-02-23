@@ -1,4 +1,3 @@
-// This file duplicates the functionality of List.jsx and isn't used in any routes
 import { useContext, useEffect } from 'react';
 import './ListItems.css';
 import { Context } from '../../context/Context';
@@ -7,13 +6,11 @@ const ListItems = () => {
   const { foodItems, fetchFoodItems, url } = useContext(Context);
   
   useEffect(() => {
-    // Refresh food items when component mounts
     fetchFoodItems();
   }, [fetchFoodItems]);
 
   const handleDelete = async (id) => {
     try {
-      // Call your API to delete the food item
       await fetch(`${url}/api/food/remove`, {
         method: 'POST',
         headers: {
@@ -22,7 +19,6 @@ const ListItems = () => {
         body: JSON.stringify({ id }),
       });
       
-      // Refresh the food list
       fetchFoodItems();
     } catch (error) {
       console.error("Error deleting food item:", error);

@@ -63,7 +63,6 @@ a {
   }
 }
 
-/* Generic dark mode styles for common elements */
 .dark-mode button {
   background-color: var(--card-bg-color);
   color: var(--text-color);
@@ -82,7 +81,6 @@ a {
   filter: brightness(0.9);
 }
 
-/* Toast notification dark mode styles */
 .dark-mode .Toastify__toast {
   background-color: var(--card-bg-color);
   color: var(--text-color);
@@ -96,26 +94,22 @@ a {
   background-color: var(--border-color);
 }
 
-/* Fix for keeping logo original in dark mode */
 .dark-mode .logo, 
 .dark-mode .navbar img.logo,
 .dark-mode .footer img.logo {
-  filter: none; /* Keep logo original in dark mode */
+  filter: none;
 }
 
-/* Make only specific icons white in dark mode */
 .dark-mode .navbar-search img,
 .dark-mode .navbar-search-icon img,
 .dark-mode .navbar-profile > img {
-  filter: brightness(10); /* Make these specific icons white */
+  filter: brightness(10);
 }
 
-/* Make sure profile icon is white in dark mode */
 .dark-mode .navbar-right .navbar-profile > img {
-  filter: brightness(10) !important; /* Ensure profile icon is white */
+  filter: brightness(10) !important;
 }
 
-/* Make sure text is always visible in dark mode */
 .dark-mode p, 
 .dark-mode h1, 
 .dark-mode h2, 
@@ -129,7 +123,6 @@ a {
   color: var(--text-color);
 }
 
-/* Ensure buttons maintain consistent styling in dark mode */
 .dark-mode button.search-submit-btn,
 .dark-mode button.add-to-cart-btn,
 .dark-mode .food-gallery-item-button {
@@ -144,7 +137,6 @@ a {
   color: white !important;
 }
 
-/* Make search clear button orange in dark mode */
 .dark-mode .clear-search {
   color: var(--primary-color) !important;
 }
@@ -153,12 +145,11 @@ a {
   color: #ff3d21 !important;
 }
 
-/* Make toggle symbols white in dark mode */
 .dark-mode .dark-mode-toggle-icon svg {
   color: white;
 }
 
 .dark-mode .dark-mode-toggle-icon .sun-icon,
 .dark-mode .dark-mode-toggle-icon .moon-icon {
-  filter: brightness(10); /* Make icons white */
+  filter: brightness(10);
 }
