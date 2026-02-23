@@ -1,10 +1,8 @@
-import express from "express";
-import { registerUser, loginUser, listUsers } from "../controllers/userController.js";
+const express = require('express');
+const router = express.Router();
+const { loginUser, registerUser } = require('../controllers/userController');
 
-const userRouter = express.Router();
+router.post('/login',    loginUser);
+router.post('/register', registerUser);
 
-userRouter.post("/login", loginUser);
-userRouter.post("/register", registerUser);
-userRouter.get("/list", listUsers);  // Add the new route
-
-export default userRouter;
+module.exports = router;

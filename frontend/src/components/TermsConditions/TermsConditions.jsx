@@ -88,7 +88,7 @@ const TermsConditions = ({ onClose }) => {
           <h4>8. Contact Information</h4>
           <p>
             For questions about this project, please contact:<br />
-            Email: contact@manojkrishna.me<br />
+            Email: contact@manojkrishna.tech<br />
             Phone: +91 852-382-3805
           </p>
           
